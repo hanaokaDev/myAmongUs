@@ -42,7 +42,7 @@ public class CrewFloater : MonoBehaviour
         }
     }
 
-    public void SpawnFloatingCrew(EPlayerColor playerColor, float dist){
+    public void SpawnFloatingCrew(EPlayerColor playerColor, float distance){
         if(crewStates[(int)playerColor]) return;
 
         crewStates[(int)playerColor] = true;

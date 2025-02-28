@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Crew
+  m_Name: M_Crew_forMapBanner
   m_Shader: {fileID: -6465566751694194690, guid: 20abff6fe1905a645ac86f722ef6bac5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

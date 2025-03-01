@@ -26,9 +26,7 @@ public class CharacterMover : NetworkBehaviour
 
     public void Move(){
         if(isOwned && isMovable){
-            Debug.Log("foo 001");
             if(PlayerSettings.controlType == EControlType.KeyboardMouse){
-                Debug.Log("foo 002");
                 Vector3 dir = Vector3.ClampMagnitude(
                     new Vector3(
                         Input.GetAxis("Horizontal"), 
@@ -43,19 +41,11 @@ public class CharacterMover : NetworkBehaviour
                 transform.position += dir * speed * Time.deltaTime;
             }
             else{
-                Debug.Log("foo 003");
                 if(Input.GetMouseButton(0)){
-                    Debug.Log("foo 004");
-                    Debug.Log("Input.mousePosition: " + Input.mousePosition);
-                    Debug.Log("Screen.width: " + Screen.width);
-                    Debug.Log("Screen.height: " + Screen.height);
                     Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f)).normalized;
-                    Debug.Log("dir: " + dir);
                     if(dir.x < 0f) transform.localScale = new Vector3(-0.5f, 0.5f, 1f); // 좌우반전
                     else if(dir.x > 0f) transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-                    Debug.Log("transform.localScale" + transform.localScale);
                     transform.position += dir * speed * Time.deltaTime;
-                    Debug.Log("transform.position" + transform.position);
                 }
             }
 

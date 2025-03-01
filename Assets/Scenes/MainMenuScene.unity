@@ -2094,7 +2094,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 413860324}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1518300418}
+        m_TargetAssemblyTypeName: CreateRoomUI, Assembly-CSharp
+        m_MethodName: CreateRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &413860324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13259,7 +13271,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 3898367262073933780, guid: c4d3a1a351549484cb220d06f65b634b, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
@@ -13280,7 +13292,7 @@ MonoBehaviour:
   timeInterpolationGui: 0
   showRoomGUI: 1
   minPlayers: 1
-  roomPlayerPrefab: {fileID: 5572948530832857177, guid: d1f0db8827d038b429a7ceb6aed0cd88, type: 3}
+  roomPlayerPrefab: {fileID: 0}
   RoomScene: Assets/Scenes/Game Room.unity
   GameplayScene: Assets/Scenes/Gameplay.unity
   _allPlayersReady: 0

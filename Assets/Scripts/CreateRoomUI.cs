@@ -105,8 +105,8 @@ public class CreateRoomUI : MonoBehaviour
     public void CreateRoom()
     {
         var manager = AmongUsRoomManager.singleton;
-        // 방 설정 작업 처리
-        manager.StartHost();
+        // TODO: 방 설정 작업 처리
+        manager.StartHost(); // 서버를 여는 동시에 클라이언트로써 게임에 참가하도록 만들어주는 함수.
     }
 }
 

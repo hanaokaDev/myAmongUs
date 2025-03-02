@@ -8,6 +8,26 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     [SyncVar]
     public EPlayerColor playerColor;
 
+    public void Start()
+    {
+        base.Start();
+        if(isServer){
+            SpawnLobbyPlayerCharacter();
+        }
+
+    }
+
+    // public override void OnStartClient()
+    // {
+    //     base.OnStartClient();
+    //     Debug.Log("OnStartClient Called!");
+    //     if(isLocalPlayer){
+    //         Debug.Log("isLocalPlayer");
+    //         PlayerSettings.controlType = EControlType.KeyboardMouse;
+    //         PlayerSettings.nickname = "Player" + Random.Range(0, 1000);
+    //     }
+    // }
+
     public void SpawnLobbyPlayerCharacter()
     {
         var roomSlots = (NetworkManager.singleton as AmongUsRoomManager).roomSlots;

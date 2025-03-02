@@ -32,7 +32,8 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
         Vector3 spawnPos = FindFirstObjectByType<SpawnPositions>().GetSpawnPosition();
 
-        var player = Instantiate(AmongUsRoomManager.singleton.spawnPrefabs[0], spawnPos, Quaternion.identity);
-        NetworkServer.Spawn(player, connectionToClient); 
+        var playerCharacter = Instantiate(AmongUsRoomManager.singleton.spawnPrefabs[0], spawnPos, Quaternion.identity).GetComponent<LobbyCharacterMover>();
+        NetworkServer.Spawn(playerCharacter.gameObject, connectionToClient); 
+        playerCharacter.playerColor = playerColor;
     }
 }

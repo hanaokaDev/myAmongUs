@@ -16,7 +16,7 @@ public class SortingSprite : MonoBehaviour
 
     void Start()
     {
-        sorter = FindObjectOfType<SpriteSorter>();
+        sorter = FindFirstObjectByType<SpriteSorter>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sortingOrder = sorter.GetSortingOrder(gameObject);
     }

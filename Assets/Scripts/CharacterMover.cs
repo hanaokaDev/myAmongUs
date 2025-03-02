@@ -34,6 +34,7 @@ public class CharacterMover : NetworkBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(playerColor));
+        Debug.Log("CharacterMover: Player Color is " + playerColor);
         animator = GetComponent<Animator>();
         if(isOwned){
             Camera cam = Camera.main;

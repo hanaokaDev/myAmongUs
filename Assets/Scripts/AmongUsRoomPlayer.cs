@@ -10,8 +10,19 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
     public void Start()
     {
-        base.Start();
-        if(isServer) SpawnLobbyPlayerCharacter();
+        // base.Start();
+        if(isServer){
+            SpawnLobbyPlayerCharacter();  
+        } 
+
+
+        // if(isServer){
+        //     base.OnStartServer();
+        //     SpawnLobbyPlayerCharacter();  
+        // } 
+        // else{
+        //     base.OnStartClient();
+        // }
     }
 
     private void SpawnLobbyPlayerCharacter(){
@@ -20,6 +31,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         EPlayerColor color = EPlayerColor.Red;
         // 겹치지 않는 플레이어의 색상을 정한다.
         for(int i=0;i<(int)EPlayerColor.Lime + 1; i++){
+            Debug.Log("SpawnLobbyPlayerCharacter: " + i + "th Loop");
             bool isFindSameColor = false;
             int debug_index = 0;
             foreach(var roomPlayer in roomSlots){
@@ -39,7 +51,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
             }
         }
         playerColor = color;
-        Debug.Log("current Player Color: " + playerColor);
+        Debug.Log("SpawnLobbyPlayerCharacter: current Player Color: " + playerColor);
 
         Vector3 spawnPos = FindFirstObjectByType<SpawnPositions>().GetSpawnPosition(); // SpawnPositions 스크립트를 찾아서, GetSpawnPosition 함수를 호출하여 스폰 위치를 가져온다.
 
@@ -49,6 +61,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         // 이 오브젝트가 새로 접속한 플레이어의 소유임을 알려준다.
         NetworkServer.Spawn(playerCharacter.gameObject, connectionToClient); 
         playerCharacter.playerColor = color;
+        Debug.Log("playerCharacter.playerColor Changed to: " + color);
 
 
         // 컴포넌트에서 게임오브젝트 접근은 .gameObject 사용.

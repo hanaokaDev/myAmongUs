@@ -5,5 +5,7 @@ using Mirror;
 
 public class AmongUsRoomPlayer : NetworkRoomPlayer
 {
-
+    [SyncVar]
+    public EPlayerColor playerColor;
+    
 }

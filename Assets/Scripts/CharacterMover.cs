@@ -5,12 +5,15 @@ using Mirror;
 
 public class CharacterMover : NetworkBehaviour
 {
+    private Animator animator;
+
     public bool isMovable;
     [SyncVar] // Network로 동기화되도록
     public float speed = 2f;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         if(isOwned){
             Camera cam = Camera.main;
             cam.transform.SetParent(transform);
@@ -26,6 +29,7 @@ public class CharacterMover : NetworkBehaviour
 
     public void Move(){
         if(isOwned && isMovable){
+            bool isMove = false;
             if(PlayerSettings.controlType == EControlType.KeyboardMouse){
                 Vector3 dir = Vector3.ClampMagnitude(
                     new Vector3(
@@ -39,6 +43,7 @@ public class CharacterMover : NetworkBehaviour
                 if(dir.x < 0f) transform.localScale = new Vector3(-0.5f, 0.5f, 1f); // 좌우반전
                 else if(dir.x > 0f) transform.localScale = new Vector3(0.5f, 0.5f, 1f); 
                 transform.position += dir * speed * Time.deltaTime;
+                isMove = dir.magnitude > 0f;
             }
             else{
                 if(Input.GetMouseButton(0)){
@@ -46,9 +51,10 @@ public class CharacterMover : NetworkBehaviour
                     if(dir.x < 0f) transform.localScale = new Vector3(-0.5f, 0.5f, 1f); // 좌우반전
                     else if(dir.x > 0f) transform.localScale = new Vector3(0.5f, 0.5f, 1f);
                     transform.position += dir * speed * Time.deltaTime;
+                    isMove = dir.magnitude > 0f;
                 }
             }
-
+            animator.SetBool("isMove", isMove);
         }
     }
 }

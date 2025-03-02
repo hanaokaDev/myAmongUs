@@ -13,28 +13,21 @@ public class CharacterMover : NetworkBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-
-    // hook을 통해, syncVar로 동기화된 변수가 서버측에서 변경되었을 때
-    // hook으로 등록한 함수가 클라이언트측에서 자동으로 호출되도록 만들어준다.
-    [SyncVar(hook = nameof(SetPlayerColor_Hook))] 
+    [SyncVar(hook = nameof(SetPlayerColor_Hook))]
     public EPlayerColor playerColor;
     public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor){
-        Debug.Log("SetPlayerColor_Hook Called!");
-        // 클라이언트에서 동기화된 playerColor 변수가 변경되었을 때 호출되는 함수
-        // 서버에서 CharacterMover의 playerColor를 변경하면, 클라이언트는 그 변경을 감지하고 오브젝트 색을 변경해야 한다.
-        if(spriteRenderer == null){
+        if(spriteRenderer == null)
+        {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(newColor));
-        Debug.Log("Player Color Changed to: " + newColor);
+        spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(newColor)); 
     }
-     
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(playerColor));
-        Debug.Log("CharacterMover: Player Color is " + playerColor);
+
         animator = GetComponent<Animator>();
         if(isOwned){
             Camera cam = Camera.main;

@@ -11,8 +11,23 @@ public class CharacterMover : NetworkBehaviour
     [SyncVar] // Network로 동기화되도록
     public float speed = 2f;
 
+    private SpriteRenderer spriteRenderer;
+
+    [SyncVar(hook = nameof(SetPlayerColor_Hook))]
+    public EPlayerColor playerColor;
+    public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor){
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(newColor)); 
+    }
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(playerColor));
+
         animator = GetComponent<Animator>();
         if(isOwned){
             Camera cam = Camera.main;

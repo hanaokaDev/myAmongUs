@@ -59,4 +59,15 @@ public class CustomizeUI : MonoBehaviour
        }
     }
 
+    public void Open()
+    {
+        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = false;
+        gameObject.SetActive(true);
+    }
+
+    public void Close(){
+        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = true;
+        gameObject.SetActive(false);
+    }
+
 }

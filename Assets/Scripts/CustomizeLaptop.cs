@@ -23,6 +23,7 @@ public class CustomizeLaptop : MonoBehaviour
         if(character != null && character.isOwned)
         {
             spriteRenderer.material.SetFloat("_Highlighted", 1f);
+            LobbyUIManager.Instance.SetUseButton(useButtonSprite, OnClickUse);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -31,6 +32,12 @@ public class CustomizeLaptop : MonoBehaviour
         if(character != null && character.isOwned)
         {
             spriteRenderer.material.SetFloat("_Highlighted", 0f);
+            LobbyUIManager.Instance.UnsetUseButton();
         }
+    }
+
+    public void OnClickUse()
+    {
+        LobbyUIManager.Instance.CustomizeUI.Open();
     }
 }

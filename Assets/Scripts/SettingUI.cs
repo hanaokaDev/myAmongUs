@@ -18,7 +18,6 @@ public class SettingUI : MonoBehaviour
 
     private void OnEnable()
     {
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = false;
         switch(PlayerSettings.controlType){
             case EControlType.Mouse:
                 MouseControlButton.image.color = Color.green;
@@ -50,13 +49,11 @@ public class SettingUI : MonoBehaviour
         }
     }
 
-    public void Close(){
+    public virtual void Close(){
         StartCoroutine(CloseAfterDelay());
-         
     }
     private IEnumerator CloseAfterDelay(){
         animator.SetTrigger("Close");
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = true;
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
         animator.ResetTrigger("Close");

@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class GameRoomSettingsUI : SettingUI
 {
+    
+    public void Open()
+    {
+        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = false;
+        gameObject.SetActive(true);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.isMovable = true;
+    }
+
     public void ExitGameRoom()
     {
         var manager = AmongUsRoomManager.singleton;

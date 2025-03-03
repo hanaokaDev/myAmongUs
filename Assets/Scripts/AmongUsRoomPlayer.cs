@@ -22,8 +22,12 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         }
     }
 
-    [SyncVar]
+    [SyncVar(hook = nameof(SetPlayerColor_Hook))]
     public EPlayerColor playerColor;
+    public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor)
+    {
+        LobbyUIManager.Instance.CustomizeUI.UpdateColorButton();
+    }
 
     public CharacterMover lobbyPlayerCharacter;
 

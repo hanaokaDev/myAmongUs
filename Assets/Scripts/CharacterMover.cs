@@ -7,7 +7,19 @@ public class CharacterMover : NetworkBehaviour
 {
     private Animator animator;
 
-    public bool isMovable;
+    private bool isMovable; // property로 바꿈. 의도는, isMovable이 false가 되면 animator도 꺼버리게 하기 위함.
+    public bool IsMovable
+    {
+        get{
+            return isMovable;
+        }
+        set{
+            if(!value){ // 받아온 value(=할당된새로운값)가 false일때만 animator의 isMove를 덩달아 false로 변경.
+                animator.SetBool("isMove", false);
+            }
+            isMovable = value;
+        }
+    }
     [SyncVar] // Network로 동기화되도록
     public float speed = 2f;
 

@@ -25,7 +25,7 @@ public class LobbyCharacterMover : CharacterMover
     public void CompleteSpawn(){
         Debug.Log("CompleteSpawn Called!");
         if(isOwned){
-            isMovable = true;
+            IsMovable = true;
         }
     }
 }

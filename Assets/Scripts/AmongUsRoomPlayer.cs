@@ -5,8 +5,27 @@ using Mirror;
 
 public class AmongUsRoomPlayer : NetworkRoomPlayer
 {
+    private static AmongUsRoomPlayer myRoomPlayer;
+    public static AmongUsRoomPlayer MyRoomPlayer
+    {
+        get
+        {
+            if(myRoomPlayer == null){
+                var players = FindObjectsOfType<AmongUsRoomPlayer>();
+                foreach(var player in players){
+                    if(player.isOwned){
+                        myRoomPlayer = player;
+                    }
+                }
+            }
+            return myRoomPlayer;
+        }
+    }
+
     [SyncVar]
     public EPlayerColor playerColor;
+
+    public CharacterMover lobbyPlayerCharacter;
 
     public void Start()
     {
@@ -27,6 +46,18 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     //         PlayerSettings.nickname = "Player" + Random.Range(0, 1000);
     //     }
     // }
+
+
+    // Command: 미러 API에서 제공. 클라이언트에서 서버로 명령을 보낼 때 사용
+    // 클라이언트에서 함수를 호출하면, 함수 내부의 동작이 서버에서 실행되게 만들어준다.
+    // 함수의 이름은 Cmd로 시작해야 한다.
+    [Command] 
+    public void CmdSetPlayerColor(EPlayerColor color)
+    {
+        playerColor = color;
+        lobbyPlayerCharacter.playerColor = color; // 자기자신을 굳이 찾지 말고, netId를 통해 기존에 저장해놓은 스스로를 바꾼다.
+    }
+
 
     public void SpawnLobbyPlayerCharacter()
     {
@@ -54,6 +85,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
         var playerCharacter = Instantiate(AmongUsRoomManager.singleton.spawnPrefabs[0], spawnPos, Quaternion.identity).GetComponent<LobbyCharacterMover>();
         NetworkServer.Spawn(playerCharacter.gameObject, connectionToClient); 
+        playerCharacter.ownerNetId = netId;
         playerCharacter.playerColor = playerColor;
     }
 }

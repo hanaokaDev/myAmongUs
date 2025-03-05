@@ -64,6 +64,7 @@ public class CreateRoomUI : MonoBehaviour
     public void UpdateMaxPlayerCount(int count){
         Debug.Log("Called UpdateMaxPlayerCount: " + count);
         roomData.maxPlayerCount = count;
+        Debug.Log("maxPlayerCount: " + roomData.maxPlayerCount);
         for(int i=0; i<maxPlayerCountButtons.Count; i++){
             if(i == count - 4){
                 maxPlayerCountButtons[i].image.color = new Color(1f, 1f, 1f, 1f);

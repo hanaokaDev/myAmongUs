@@ -99,7 +99,9 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
         Vector3 spawnPos = FindFirstObjectByType<SpawnPositions>().GetSpawnPosition();
 
+
         var playerCharacter = Instantiate(AmongUsRoomManager.singleton.spawnPrefabs[0], spawnPos, Quaternion.identity).GetComponent<LobbyCharacterMover>();
+        playerCharacter.transform.localScale = index < 5 ? new Vector3(0.5f, 0.5f, 1f) : new Vector3(-0.5f, 0.5f, 1f); // 5번째부터의 의자에서 스폰되었다면 좌우반전해줌.
         NetworkServer.Spawn(playerCharacter.gameObject, connectionToClient); 
         playerCharacter.ownerNetId = netId;
         playerCharacter.playerColor = playerColor;

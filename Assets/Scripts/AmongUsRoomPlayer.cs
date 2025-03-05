@@ -24,9 +24,9 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
     [SyncVar(hook = nameof(SetPlayerColor_Hook))]
     public EPlayerColor playerColor;
-    public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor)
+    public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor) // Client에서 호출되는 함수
     {
-        LobbyUIManager.Instance.CustomizeUI.UpdateColorButton();
+        LobbyUIManager.Instance.CustomizeUI.UpdateSelectColorButton(newColor); // 클라이언트들에게 색변경 통보하는 부분
     }
 
     public CharacterMover lobbyPlayerCharacter;
@@ -34,11 +34,20 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     public void Start()
     {
         base.Start();
-        if(isServer){
+        if(isServer){ 
             SpawnLobbyPlayerCharacter();
         }
 
     }
+
+    private void OnDestroy()
+    {
+        if(LobbyUIManager.Instance != null){
+            LobbyUIManager.Instance.CustomizeUI.UpdateUnselectColorButton(playerColor);
+        }
+        
+    }
+
 
     // public override void OnStartClient()
     // {
@@ -63,6 +72,9 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     }
 
 
+    // 새로운 플레이어가 접속했을 때, 서버역할 호스트에서 LobbyPlayerCharacter를 생성하는 단계.
+    // 그러면서 플레이어의 기본색상을 정하고, 
+    // 다른 클라이언트에서는 SetPlayerColor_Hook 함수를 통해 통보받아서 UI를 업데이트한다.
     public void SpawnLobbyPlayerCharacter()
     {
         var roomSlots = (NetworkManager.singleton as AmongUsRoomManager).roomSlots;
@@ -83,7 +95,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
                 break;
             }
         }
-        playerColor = color;
+        playerColor = color; // playerColor가 바뀌었으니 hook함수가 호출된다.
 
         Vector3 spawnPos = FindFirstObjectByType<SpawnPositions>().GetSpawnPosition();
 

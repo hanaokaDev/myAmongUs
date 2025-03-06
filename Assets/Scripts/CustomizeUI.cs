@@ -21,7 +21,7 @@ public class CustomizeUI : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateColorButton();
+        UpdateColorButtonAll();
         var roomSlots = (NetworkManager.singleton as AmongUsRoomManager).roomSlots;
         foreach(var player in roomSlots){
             var aPlayer = player as AmongUsRoomPlayer;
@@ -32,7 +32,7 @@ public class CustomizeUI : MonoBehaviour
         }
     }
 
-    public void UpdateColorButton() // Hook을 통해 Client가 호출하는 함수.
+    public void UpdateColorButtonAll() // Hook을 통해 Client가 호출하는 함수.
     {
         var roomSlots = (NetworkManager.singleton as AmongUsRoomManager).roomSlots;
         /*
@@ -41,7 +41,7 @@ public class CustomizeUI : MonoBehaviour
         그러나 클라이언트에서는 이 순서가 보장되지 않는다.
         따라서, 클라이언트에서는 새로 생성된 플레이어가 RoomSlots에 등록되기 전에 updateColorButton 함수를 호출할수도 있다.
         따라서, 버튼 전체를 Update하는 것보다 필요한 버튼 1개만 업데이트하는 방식으로 하는게 좋다.
-            그러므로, UpdateSelectColorButton을 따로 만들자.
+            그러므로, UpdateColorButtonInvalid을 따로 만들자.
         */
         for(int i=0; i<colorSelectButtons.Count; i++)
         {
@@ -49,15 +49,18 @@ public class CustomizeUI : MonoBehaviour
         }
 
         foreach(var player in roomSlots){
+            Debug.Log("UpdateColorButtonAll - Current My PlayerId is " + AmongUsRoomPlayer.MyRoomPlayer.netId);
+            Debug.Log("UpdateColorButtonAll - Current Target PlayerId is " + player.netId);
             var aPlayer = player as AmongUsRoomPlayer;
             colorSelectButtons[(int)aPlayer.playerColor].SetInteractable(false);
+            Debug.Log("UpdateColorButtonAll - SetInteractable(false): " + aPlayer.playerColor);
         }
     }
-    public void UpdateSelectColorButton(EPlayerColor playerColor)
+    public void UpdateColorButtonInvalid(EPlayerColor playerColor)
     {
         colorSelectButtons[(int)playerColor].SetInteractable(false);
     }
-    public void UpdateUnselectColorButton(EPlayerColor playerColor)
+    public void UpdateColorButtonValid(EPlayerColor playerColor)
     {
         colorSelectButtons[(int)playerColor].SetInteractable(true);
     }

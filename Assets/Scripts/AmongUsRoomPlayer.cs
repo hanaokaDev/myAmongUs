@@ -26,7 +26,8 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     public EPlayerColor playerColor;
     public void SetPlayerColor_Hook(EPlayerColor oldColor, EPlayerColor newColor) // Client에서 호출되는 함수
     {
-        LobbyUIManager.Instance.CustomizeUI.UpdateSelectColorButton(newColor); // 클라이언트들에게 색변경 통보하는 부분
+        LobbyUIManager.Instance.CustomizeUI.UpdateColorButtonValid(oldColor); // 클라이언트들에게 색변경 통보하는 부분
+        LobbyUIManager.Instance.CustomizeUI.UpdateColorButtonInvalid(newColor); // 클라이언트들에게 색변경 통보하는 부분
     }
 
     public CharacterMover lobbyPlayerCharacter;
@@ -43,7 +44,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     private void OnDestroy()
     {
         if(LobbyUIManager.Instance != null){
-            LobbyUIManager.Instance.CustomizeUI.UpdateUnselectColorButton(playerColor);
+            LobbyUIManager.Instance.CustomizeUI.UpdateColorButtonValid(playerColor);
         }
         
     }

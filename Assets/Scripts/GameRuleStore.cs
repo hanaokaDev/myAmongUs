@@ -7,6 +7,7 @@ using System.Text;
 
 public class GameRuleStore : NetworkBehaviour
 {
+    /****************************************************/
     [SyncVar(hook = nameof(SetIsRecommendRule_Hook))]
     private bool isRecommendRule;
     [SerializeField]
@@ -15,7 +16,16 @@ public class GameRuleStore : NetworkBehaviour
     { 
         UpdateGameRuleOverview();
     }
+    public void OnRecommendToggle(bool value) // 콜백함수
+    {
+        isRecommendRule = value;
+        if(isRecommendRule)
+        {
+            SetRecommendGameRule();
+        }
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetConfirmEjects_Hook))]
     private bool confirmEjects;
     [SerializeField]
@@ -24,7 +34,14 @@ public class GameRuleStore : NetworkBehaviour
     {
         UpdateGameRuleOverview();
     }
+    public void OnConfirmEjectsToggle(bool value) // 콜백함수
+    {
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+        confirmEjects = value;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetEmergencyMeetings_Hook))]
     private int emergencyMeetings;
     [SerializeField]
@@ -34,7 +51,14 @@ public class GameRuleStore : NetworkBehaviour
         emergencyMeetingsText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeEmergencyMeetings(bool isPlus)
+    {
+        emergencyMeetings = Mathf.Clamp(emergencyMeetings + (isPlus ? 1 : -1), 0, 9); // 1 단위로 0에서 9까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetEmergencyMeetingsCooldown_Hook))]
     private int emergencyMeetingsCooldown;
     [SerializeField]
@@ -44,7 +68,14 @@ public class GameRuleStore : NetworkBehaviour
         emergencyMeetingsCooldownText.text = string.Format("{0}s", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeEmergencyMeetingsCooldown(bool isPlus)
+    {
+        emergencyMeetingsCooldown = Mathf.Clamp(emergencyMeetingsCooldown + (isPlus ? 5 : -5), 0, 60); // 5 단위로 0에서 60까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetMeetingsTime_Hook))]
     private int meetingsTime;
     [SerializeField]
@@ -54,7 +85,14 @@ public class GameRuleStore : NetworkBehaviour
         meetingsTimeText.text = string.Format("{0}s", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeMeetingsTime(bool isPlus)
+    {
+        meetingsTime = Mathf.Clamp(meetingsTime + (isPlus ? 5 : -5), 0, 120); // 5 단위로 0에서 120까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetVoteTime_Hook))]
     private int voteTime;
     [SerializeField]
@@ -64,7 +102,14 @@ public class GameRuleStore : NetworkBehaviour
         voteTimeText.text = string.Format("{0}s", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeVoteTime(bool isPlus)
+    {
+        voteTime = Mathf.Clamp(voteTime + (isPlus ? 5 : -5), 0, 300); // 5 단위로 0에서 300까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetAnonymousVotes_Hook))]
     private bool anonymousVotes;
     [SerializeField]
@@ -73,7 +118,14 @@ public class GameRuleStore : NetworkBehaviour
     {
         UpdateGameRuleOverview();
     }
+    public void OnAnonymousVotesToggle(bool value) // 콜백함수
+    {
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+        anonymousVotes = value;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetMoveSpeed_Hook))]
     private float moveSpeed;
     [SerializeField]
@@ -83,7 +135,14 @@ public class GameRuleStore : NetworkBehaviour
         moveSpeedText.text = string.Format("{0:0.0}x", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeMoveSpeed(bool isPlus)
+    {
+        moveSpeed = Mathf.Clamp(moveSpeed + (isPlus ? 0.25f : -0.25f), 0.5f, 3f); // 0.25 단위로 0.5에서 3까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetCrewSight_Hook))]
     private float crewSight;
     [SerializeField]
@@ -93,8 +152,14 @@ public class GameRuleStore : NetworkBehaviour
         crewSightText.text = string.Format("{0:0.0}x", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeCrewSight(bool isPlus)
+    {
+        crewSight = Mathf.Clamp(crewSight + (isPlus ? 0.25f : -0.25f), 0.25f, 5f); // 0.25 단위로 0.25에서 5까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
-
+    /****************************************************/
     [SyncVar(hook = nameof(SetImposterSight_Hook))]
     private float imposterSight;
     [SerializeField]
@@ -104,7 +169,14 @@ public class GameRuleStore : NetworkBehaviour
         imposterSightText.text = string.Format("{0:0.0}x", value);
         UpdateGameRuleOverview();
     }
+    public void OnChangeImposterSight(bool isPlus)
+    {
+        imposterSight = Mathf.Clamp(imposterSight + (isPlus ? 0.25f : -0.25f), 0.25f, 5f); // 0.25 단위로 0.25에서 5까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetKillCoolDown_Hook))]
     private float killCoolDown;
     [SerializeField]
@@ -114,7 +186,14 @@ public class GameRuleStore : NetworkBehaviour
         killCoolDownText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeKillCoolDown(bool isPlus)
+    {
+        killCoolDown = Mathf.Clamp(killCoolDown + (isPlus ? 2.5f : -2.5f), 10f, 60f); // 2.5 단위로 10에서 60까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetKillRange_Hook))]
     private EKillRange killRange;
     [SerializeField]
@@ -124,7 +203,14 @@ public class GameRuleStore : NetworkBehaviour
         killRangeDropText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeKillRange(bool isPlus)
+    {
+        killRange = (EKillRange)Mathf.Clamp((int)killRange + (isPlus ? 1 : -1), 0, 2); // 0에서 2까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetVisualTasks_Hook))]
     private bool visualTasks;
     [SerializeField]
@@ -133,7 +219,14 @@ public class GameRuleStore : NetworkBehaviour
     {
         UpdateGameRuleOverview();
     }
+    public void OnVisualTasksToggle(bool value) // 콜백함수
+    {
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+        visualTasks = value;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetTaskBarUpdates_Hook))]
     private ETaskBarUpdates taskBarUpdates;
     [SerializeField]
@@ -143,7 +236,14 @@ public class GameRuleStore : NetworkBehaviour
         taskBarUpdatesDropText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeTaskBarUpdates(bool isPlus)
+    {
+        taskBarUpdates = (ETaskBarUpdates)Mathf.Clamp((int)taskBarUpdates + (isPlus ? 1 : -1), 0, 2); // 0에서 2까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetCommonTasks_Hook))]
     private int commonTasks;
     [SerializeField]
@@ -153,7 +253,14 @@ public class GameRuleStore : NetworkBehaviour
         commonTasksText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeCommonTasks(bool isPlus)
+    {
+        commonTasks = Mathf.Clamp(commonTasks + (isPlus ? 1 : -1), 0, 2); // 1 단위로 0에서 2까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetComplexTasks_Hook))]
     private int complexTasks;
     [SerializeField]
@@ -163,7 +270,14 @@ public class GameRuleStore : NetworkBehaviour
         complexTasksText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeComplexTasks(bool isPlus)
+    {
+        complexTasks = Mathf.Clamp(complexTasks + (isPlus ? 1 : -1), 0, 3); // 1 단위로 0에서 2까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SyncVar(hook = nameof(SetSimpleTasks_Hook))]
     private int simpleTasks;
     [SerializeField]
@@ -173,7 +287,14 @@ public class GameRuleStore : NetworkBehaviour
         simpleTasksText.text = value.ToString();
         UpdateGameRuleOverview();
     }
+    public void OnChangeSimpleTasks(bool isPlus)
+    {
+        simpleTasks = Mathf.Clamp(simpleTasks + (isPlus ? 1 : -1), 0, 5); // 1 단위로 0에서 5까지.
+        isRecommendRule = false;
+        isRecommendRuleToggle.isOn = false;
+    }
 
+    /****************************************************/
     [SerializeField]
     private Text gameRuleOverview;
     private void UpdateGameRuleOverview()

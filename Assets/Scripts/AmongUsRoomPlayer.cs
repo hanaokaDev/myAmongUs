@@ -38,7 +38,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         if(isServer){ 
             SpawnLobbyPlayerCharacter();
         }
-        LobbyUIManager.Instance.UpdatePlayerCount();
+        LobbyUIManager.Instance.GameRoomPlayerCounter.UpdatePlayerCount();
 
     }
 
@@ -46,7 +46,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     {
         if(LobbyUIManager.Instance != null){
             LobbyUIManager.Instance.CustomizeUI.UpdateColorButtonValid(playerColor);
-            LobbyUIManager.Instance.UpdatePlayerCount();
+            LobbyUIManager.Instance.GameRoomPlayerCounter.UpdatePlayerCount();
         }
         
     }

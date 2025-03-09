@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103063611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -1834,7 +1834,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1493431411}
+        m_TargetAssemblyTypeName: GameRuleStore, Assembly-CSharp
+        m_MethodName: OnAnonymousVotesToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &181837683
 GameObject:
@@ -6127,7 +6139,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1493431411}
+        m_TargetAssemblyTypeName: GameRuleStore, Assembly-CSharp
+        m_MethodName: OnConfirmEjectsToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &676228084
 GameObject:
@@ -12266,7 +12290,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1493431411}
+        m_TargetAssemblyTypeName: GameRuleStore, Assembly-CSharp
+        m_MethodName: OnRecommendToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1402034339
 GameObject:
@@ -13378,6 +13414,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482672937}
   m_CullTransparentMesh: 1
+--- !u!1 &1493431410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493431412}
+  - component: {fileID: 1493431411}
+  m_Layer: 0
+  m_Name: Game Rule Store
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1493431411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493431410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab21ecc873580d419afdc3b655d9e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  isRecommendRuleToggle: {fileID: 1379959677}
+  confirmEjectsToggle: {fileID: 670952769}
+  emergencyMeetingsText: {fileID: 887950937}
+  emergencyMeetingsCooldownText: {fileID: 111640515}
+  meetingsTimeText: {fileID: 52611139}
+  voteTimeText: {fileID: 991931117}
+  anonymousVotesToggle: {fileID: 175366072}
+  moveSpeedText: {fileID: 802783008}
+  crewSightText: {fileID: 2014400783}
+  imposterSightText: {fileID: 1599003167}
+  killCoolDownText: {fileID: 1599569517}
+  killRangeDropText: {fileID: 839421858}
+  visualTasksToggle: {fileID: 2013222250}
+  taskBarUpdatesDropText: {fileID: 1403884134}
+  commonTasksText: {fileID: 191914910}
+  complexTasksText: {fileID: 220448509}
+  simpleTasksText: {fileID: 209975278}
+  gameRuleOverview: {fileID: 1070052469}
+--- !u!4 &1493431412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493431410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 985.116, y: -504.77954, z: -2.5275228}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1495843991
 GameObject:
   m_ObjectHideFlags: 0
@@ -18419,7 +18520,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1493431411}
+        m_TargetAssemblyTypeName: GameRuleStore, Assembly-CSharp
+        m_MethodName: OnVisualTasksToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2014400781
 GameObject:
@@ -19891,3 +20004,4 @@ SceneRoots:
   - {fileID: 769033510}
   - {fileID: 1368523484}
   - {fileID: 657576534}
+  - {fileID: 1493431412}

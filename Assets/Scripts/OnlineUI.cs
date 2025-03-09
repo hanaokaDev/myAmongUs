@@ -28,6 +28,7 @@ public class OnlineUI : MonoBehaviour
     {
         // singelton으로 RoomManager를 찾아서 클라이언트를 시작하게 만들어줌.
         if(nicknameInputField.text != "Enter Nickname"){
+            PlayerSettings.nickname = nicknameInputField.text;
             var manager = AmongUsRoomManager.singleton;
             manager.StartClient();
         }

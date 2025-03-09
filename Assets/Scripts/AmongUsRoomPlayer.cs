@@ -30,6 +30,12 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         LobbyUIManager.Instance.CustomizeUI.UpdateColorButtonInvalid(newColor); // 클라이언트들에게 색변경 통보하는 부분
     }
 
+
+    [SyncVar]
+    public string nickname;
+    
+
+
     public CharacterMover lobbyPlayerCharacter;
 
     public void Start()
@@ -37,6 +43,10 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         base.Start();
         if(isServer){ 
             SpawnLobbyPlayerCharacter();
+        }
+        if(isLocalPlayer)
+        {
+            CmdSetNickname(PlayerSettings.nickname);
         }
         LobbyUIManager.Instance.GameRoomPlayerCounter.UpdatePlayerCount();
 
@@ -67,6 +77,14 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     // Command: 미러 API에서 제공. 클라이언트에서 서버로 명령을 보낼 때 사용
     // 클라이언트에서 함수를 호출하면, 함수 내부의 동작이 서버에서 실행되게 만들어준다.
     // 함수의 이름은 Cmd로 시작해야 한다.
+    [Command]
+    public void CmdSetNickname(string nick)
+    {
+        nickname = nick;
+        lobbyPlayerCharacter.nickname = nick;
+    }
+
+
     [Command] 
     public void CmdSetPlayerColor(EPlayerColor color)
     {

@@ -21,6 +21,15 @@ public class LobbyUIManager : MonoBehaviour
     [SerializeField]
     private Sprite originUseButtonSprite;
 
+    [SerializeField]
+    private Text playerCountText;
+    public void UpdatePlayerCount()
+    {
+        var manager = NetworkManager.singleton as AmongUsRoomManager;
+        var players = FindObjectsOfType<AmongUsRoomPlayer>();
+        playerCountText.text = string.Format("{0}/{1}", players.Length, manager.maxConnections);
+    }
+
 
     private void Awake()
     {

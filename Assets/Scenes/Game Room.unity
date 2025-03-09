@@ -15882,6 +15882,7 @@ MonoBehaviour:
   customizeUI: {fileID: 1268212362}
   useButton: {fileID: 4767845}
   originUseButtonSprite: {fileID: 21300000, guid: 1abf9d0ad96ed484ab3f289f79f9404d, type: 3}
+  playerCountText: {fileID: 1193807704}
 --- !u!1 &1683430045
 GameObject:
   m_ObjectHideFlags: 0

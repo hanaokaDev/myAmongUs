@@ -22,6 +22,8 @@ public class GameRoomPlayerCounter : NetworkBehaviour
         playerCountText.color = isStartable ? Color.white : Color.red;
 
         playerCountText.text = string.Format("{0}/{1}", players.Length, maxPlayer); // 기존에는 manager.maxConnections가 Client들에게 제대로 공유되지않는 문제가 있었음. 그것은 원래 소속이었던 LobbyUIManager.cs에서 NetworkBehaviour를 상속받지 않고, MonoBehaviour만 상속받아서 발생한 문제임.
+
+        LobbyUIManager.Instance.SetInteractableStartButton(isStartable);
     }
 
     void Start()

@@ -43,6 +43,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
         base.Start();
         if(isServer){ 
             SpawnLobbyPlayerCharacter();
+            LobbyUIManager.Instance.ActiveStartButton(); 
         }
         if(isLocalPlayer)
         {

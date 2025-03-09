@@ -69,7 +69,7 @@ public class LobbyUIManager : MonoBehaviour
         var players = FindObjectsOfType<AmongUsRoomPlayer>();
         for(int i=0;i<players.Length;i++)
         {
-            players[i].readyToBegin = true;
+            players[i].CmdChangeReadyState(true);
         }
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         manager.ServerChangeScene(manager.GameplayScene);

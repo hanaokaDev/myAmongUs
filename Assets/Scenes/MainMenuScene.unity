@@ -13303,7 +13303,7 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 0
   roomPlayerPrefab: {fileID: 5572948530832857177, guid: d1f0db8827d038b429a7ceb6aed0cd88, type: 3}
   RoomScene: Assets/Scenes/Game Room.unity

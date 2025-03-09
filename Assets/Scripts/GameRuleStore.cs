@@ -295,6 +295,15 @@ public class GameRuleStore : NetworkBehaviour
     }
 
     /****************************************************/
+    [SyncVar(hook = nameof(SetImposterCount_Hook))]
+    private int imposterCount;
+    public void SetImposterCount_Hook(int _, int value)
+    {
+        UpdateGameRuleOverview();
+    }
+
+
+    /****************************************************/
     [SerializeField]
     private Text gameRuleOverview;
     private void UpdateGameRuleOverview()
@@ -302,7 +311,7 @@ public class GameRuleStore : NetworkBehaviour
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         StringBuilder sb = new StringBuilder(isRecommendRule ? "추천 규칙" : "사용자 규칙");
         sb.Append("맵: The Skeld\n");
-        sb.Append($"#임포스터: {manager.imposterCount}\n");
+        sb.Append($"#임포스터: {imposterCount}\n");
         sb.Append(string.Format("Confirm Ejects: {0}\n", confirmEjects ? "켜짐" : "꺼짐"));
         sb.Append(string.Format($"긴급 회의: {emergencyMeetings}\n"));
         sb.Append(string.Format("Anonymous Votes: {0}\n", anonymousVotes ? "켜짐" : "꺼짐"));
@@ -345,6 +354,11 @@ public class GameRuleStore : NetworkBehaviour
     {
         if(isServer)
         {
+            var manager = NetworkManager.singleton as AmongUsRoomManager;
+            imposterCount = manager.imposterCount;
+            anonymousVotes = false;
+            taskBarUpdates = ETaskBarUpdates.Always;
+
             SetRecommendGameRule();
         }
     }

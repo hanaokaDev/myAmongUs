@@ -4663,6 +4663,7 @@ GameObject:
   - component: {fileID: 1588044134}
   - component: {fileID: 1588044135}
   - component: {fileID: 1588044136}
+  - component: {fileID: 1588044137}
   m_Layer: 0
   m_Name: sprite_engine_body_0
   m_TagString: Untagged
@@ -4766,6 +4767,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1588044137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588044133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63436f4166f75b459933ab40c135036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steams:
+  - {fileID: 1192257923}
+  - {fileID: 2131708524}
 --- !u!1 &1602261160
 GameObject:
   m_ObjectHideFlags: 0

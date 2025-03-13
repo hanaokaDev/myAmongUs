@@ -45,7 +45,12 @@ public class CharacterMover : NetworkBehaviour
         nicknameText.text = value;
     }
 
-    void Start()
+    [SerializeField]
+    private float characterSize = 0.5f; 
+    [SerializeField]
+    private float cameraSize = 2.5f;
+
+    public virtual void Start() // 재정의할수있게 virtual로 선언
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetColor("_PlayerColor", PlayerColor.GetColor(playerColor));
@@ -55,7 +60,7 @@ public class CharacterMover : NetworkBehaviour
             Camera cam = Camera.main;
             cam.transform.SetParent(transform);
             cam.transform.localPosition = new Vector3(0f, 0f, -10f);
-            cam.orthographicSize = 2.5f; // 카메라 줌인
+            cam.orthographicSize = cameraSize; // 카메라 줌인
         }
     }
 
@@ -77,16 +82,16 @@ public class CharacterMover : NetworkBehaviour
                     1f
                 ); 
 
-                if(dir.x < 0f) transform.localScale = new Vector3(-0.5f, 0.5f, 1f); // 좌우반전
-                else if(dir.x > 0f) transform.localScale = new Vector3(0.5f, 0.5f, 1f); 
+                if(dir.x < 0f) transform.localScale = new Vector3(-characterSize, characterSize, 1f); // 좌우반전
+                else if(dir.x > 0f) transform.localScale = new Vector3(characterSize, characterSize, 1f); 
                 transform.position += dir * speed * Time.deltaTime;
                 isMove = dir.magnitude > 0f;
             }
             else{
                 if(Input.GetMouseButton(0)){
                     Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f)).normalized;
-                    if(dir.x < 0f) transform.localScale = new Vector3(-0.5f, 0.5f, 1f); // 좌우반전
-                    else if(dir.x > 0f) transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+                    if(dir.x < 0f) transform.localScale = new Vector3(-characterSize, characterSize, 1f); // 좌우반전
+                    else if(dir.x > 0f) transform.localScale = new Vector3(characterSize, characterSize, 1f);
                     transform.position += dir * speed * Time.deltaTime;
                     isMove = dir.magnitude > 0f;
                 }

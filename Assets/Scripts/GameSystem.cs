@@ -13,6 +13,11 @@ public class GameSystem : NetworkBehaviour
     public List<InGameCharacterMover> players = new List<InGameCharacterMover>(); 
     // 디버깅위해서 public으로 변경함.
 
+    [SerializeField]
+    private Transform spawnTransform;
+
+    [SerializeField]
+    private float spawnDistance;
     public void AddPlayer(InGameCharacterMover player)
     {
         if(!players.Contains(player)){
@@ -40,6 +45,17 @@ public class GameSystem : NetworkBehaviour
                 i--;
             }
         }
+
+        // 플레이어 스폰 시 원형으로 배치되도록 삼각함수 사용
+        for(int i=0; i<players.Count; i++)
+        {
+            float radian = 2 * Mathf.PI * i / players.Count;
+            float x = Mathf.Cos(radian) * spawnDistance;
+            float z = Mathf.Sin(radian) * spawnDistance;
+            Vector3 newPosition = spawnTransform.position + new Vector3(x, 0, z);
+            players[i].RpcTeleport(newPosition);
+        } // 캐릭터 위치 동기화권한은 각 클라이언트에게 있기 때문에, transform.position을 여기서 직접 수정하면 위치가 제대로 수정되지 않는다. 따라서 InGameCharacterMover 스크립트에서 RpcTeleport 함수를 만들고 서버에서 클라이언트에게 하여금 스스로 transform.position을 수정하도록 해야 한다.
+
         yield return new WaitForSeconds(1f);
         RpcStartGame();
     }

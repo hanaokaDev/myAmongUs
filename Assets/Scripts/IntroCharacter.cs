@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 
-public class IntroCharacter : NetworkBehaviour
+public class IntroCharacter : MonoBehaviour
 {
     [SerializeField]
     private Image character;

@@ -641,7 +641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &78067335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -674,9 +674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 78067337}
   nickname: {fileID: 385130055}
 --- !u!114 &78067337
@@ -806,9 +803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 78755586}
   nickname: {fileID: 1578896700}
 --- !u!1 &82390286
@@ -1954,7 +1948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &184122180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1987,9 +1981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 184122182}
   nickname: {fileID: 1681850632}
 --- !u!114 &184122182
@@ -2042,6 +2033,7 @@ GameObject:
   - component: {fileID: 188424250}
   - component: {fileID: 188424249}
   - component: {fileID: 188424248}
+  - component: {fileID: 188424252}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2132,6 +2124,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &188424252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188424247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbe7837e9da2864e9a6db10213ec83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inGameIntroUI: {fileID: 1940065889}
 --- !u!1 &194214862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,7 +3582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &367059189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3610,9 +3615,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 367059191}
   nickname: {fileID: 1508152100}
 --- !u!114 &367059191
@@ -3750,7 +3752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &407622548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3783,9 +3785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 407622550}
   nickname: {fileID: 2144366767}
 --- !u!114 &407622550
@@ -5730,7 +5729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &661304195
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5763,9 +5762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 661304197}
   nickname: {fileID: 552068550}
 --- !u!114 &661304197
@@ -6495,7 +6491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &794312221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6528,9 +6524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 794312223}
   nickname: {fileID: 1774829567}
 --- !u!114 &794312223
@@ -8253,7 +8246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1085110458
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8286,9 +8279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 1085110460}
   nickname: {fileID: 1389942104}
 --- !u!114 &1085110460
@@ -9056,7 +9046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1142610807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9089,9 +9079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 1142610809}
   nickname: {fileID: 2014838221}
 --- !u!114 &1142610809
@@ -10751,7 +10738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1372248083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10784,9 +10771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028c9e6b3015f0a479a2420b97b430df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   character: {fileID: 1372248085}
   nickname: {fileID: 1562324851}
 --- !u!114 &1372248085
@@ -14438,7 +14422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1909737790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14764,6 +14748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0034a503c9ef1e4397ca003c44a6efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shhhhObj: {fileID: 783604939}
+  crewmateObj: {fileID: 1909737789}
   playerType: {fileID: 2027223186}
   gradientImage: {fileID: 1184848038}
   myCharacter: {fileID: 78755588}

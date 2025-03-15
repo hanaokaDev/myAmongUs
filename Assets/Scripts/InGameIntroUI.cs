@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class InGameIntroUI : MonoBehaviour
 {
     [SerializeField]
+    private GameObject shhhhObj;
+
+    [SerializeField]
+    private GameObject crewmateObj;
+
+    [SerializeField]
     private Text playerType;
 
     [SerializeField]
@@ -22,6 +28,16 @@ public class InGameIntroUI : MonoBehaviour
 
     [SerializeField]
     private Color imposterColor;
+
+    public IEnumerator ShowIntroSequence()
+    {
+        shhhhObj.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        shhhhObj.SetActive(false);
+
+        ShowPlayerType();
+        crewmateObj.SetActive(true);
+    }
 
     public void ShowPlayerType()
     {

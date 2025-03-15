@@ -53,9 +53,20 @@ public class GameSystem : NetworkBehaviour
         Debug.Log("GameReady: Done Allocating Imposters");
         yield return new WaitForSeconds(1f);
         Debug.Log("GameReady: Done WaitForSeconds(1f)");
-        yield return StartCoroutine(InGameUIManager.Instance.InGameIntroUI.ShowIntroSequence());
-        Debug.Log("GameReady: Finished");
+        RpcStartGame();
     }
+        
+    // GameReady에서 Client도 실행해야하는부분을 여기로 뺌.
+    [ClientRpc] // Client에게 실행하라고 명령함.
+    private void RpcStartGame()
+    {
+        StartCoroutine(StartGameCoroutine());
+    }
+    private IEnumerator StartGameCoroutine()
+    {
+        yield return StartCoroutine(InGameUIManager.Instance.InGameIntroUI.ShowIntroSequence());
+    }
+
 
     public List<InGameCharacterMover> GetPlayerList()
     {

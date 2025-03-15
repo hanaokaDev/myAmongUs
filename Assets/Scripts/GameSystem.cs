@@ -65,6 +65,8 @@ public class GameSystem : NetworkBehaviour
     private IEnumerator StartGameCoroutine()
     {
         yield return StartCoroutine(InGameUIManager.Instance.InGameIntroUI.ShowIntroSequence());
+        yield return new WaitForSeconds(3f);
+        InGameUIManager.Instance.InGameIntroUI.Close();
     }
 
 

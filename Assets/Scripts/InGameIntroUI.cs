@@ -29,6 +29,9 @@ public class InGameIntroUI : MonoBehaviour
     [SerializeField]
     private Color imposterColor;
 
+    [SerializeField]
+    private CanvasGroup canvasGroup;
+
     public IEnumerator ShowIntroSequence()
     {
         Debug.Log("ShowIntroSequence Called");
@@ -88,5 +91,20 @@ public class InGameIntroUI : MonoBehaviour
         }
     }
 
+    public void Close()
+    {
+        StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    { // alpha값을 0으로 천천히 옮겨줌.
+        float timer = 0f;
+        while(timer <= 1f){
+            yield return null;
+            timer += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, timer);
+        }
+        gameObject.SetActive(false);
+    }
 
 }

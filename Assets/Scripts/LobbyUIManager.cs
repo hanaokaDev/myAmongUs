@@ -66,6 +66,7 @@ public class LobbyUIManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
+        Debug.Log("OnClickStartButton Called!");
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         manager.gameRuleData = FindObjectOfType<GameRuleStore>().GetGameRuleData();
 

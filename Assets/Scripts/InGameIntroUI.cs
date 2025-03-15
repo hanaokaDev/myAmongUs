@@ -31,8 +31,10 @@ public class InGameIntroUI : MonoBehaviour
 
     public IEnumerator ShowIntroSequence()
     {
+        Debug.Log("ShowIntroSequence Called");
         shhhhObj.SetActive(true);
         yield return new WaitForSeconds(2f);
+        Debug.Log("ShowIntroSequence WaitForSeconds Ended");
         shhhhObj.SetActive(false);
 
         ShowPlayerType();

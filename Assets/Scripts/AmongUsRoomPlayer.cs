@@ -38,7 +38,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
 
     public CharacterMover lobbyPlayerCharacter;
 
-    public void Start()
+    public override void Start() // override 빠져있어서 추가함.
     {
         base.Start();
         if(isServer){ 

@@ -10,23 +10,34 @@ public class GameSystem : NetworkBehaviour
 
     // 이 클래스의 Start에서 players에 할당하려고 하면, Start 시점에 Players의 InGameCharacterMover 객체가 없을 가능성이 있음.
     // 따라서, Player가 생성될때마다 스스로 직접 이 players 객체에 값을 추가해주는식으로 구현하여야 한다.
-    private List<InGameCharacterMover> players = new List<InGameCharacterMover>(); 
+    public List<InGameCharacterMover> players = new List<InGameCharacterMover>(); 
+    // 디버깅위해서 public으로 변경함.
 
     public void AddPlayer(InGameCharacterMover player)
     {
         if(!players.Contains(player)){
             players.Add(player);
+            Debug.Log("AddPlayer: " + player.nickname);
+            Debug.Log("AddPlayer: players.Count: " + players.Count);
         }
     }
 
     private IEnumerator GameReady()
     {
+        Debug.Log("GameReady Called");
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         while(manager.roomSlots.Count != players.Count)
         {
+            Debug.Log("GameReady: Error - Waiting for all players to be ready");
+            Debug.Log("GameReady: roomSlots.Count: " + manager.roomSlots.Count);
+            Debug.Log("GameReady: players.Count: " + players.Count);
             yield return null;
         }
+        Debug.Log("GameReady: Success - All players are ready");
+        Debug.Log("GameReady: roomSlots.Count: " + manager.roomSlots.Count);
+        Debug.Log("GameReady: players.Count: " + players.Count);
 
+        Debug.Log("GameReady: Allocating Imposters");
         // 임포스터 할당
         for(int i=0; i<manager.imposterCount; i++)
         {
@@ -39,8 +50,11 @@ public class GameSystem : NetworkBehaviour
                 i--;
             }
         }
+        Debug.Log("GameReady: Done Allocating Imposters");
         yield return new WaitForSeconds(1f);
+        Debug.Log("GameReady: Done WaitForSeconds(1f)");
         yield return StartCoroutine(InGameUIManager.Instance.InGameIntroUI.ShowIntroSequence());
+        Debug.Log("GameReady: Finished");
     }
 
     public List<InGameCharacterMover> GetPlayerList()

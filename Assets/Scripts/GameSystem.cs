@@ -17,27 +17,17 @@ public class GameSystem : NetworkBehaviour
     {
         if(!players.Contains(player)){
             players.Add(player);
-            Debug.Log("AddPlayer: " + player.nickname);
-            Debug.Log("AddPlayer: players.Count: " + players.Count);
         }
     }
 
     private IEnumerator GameReady() // server에서만 호출해야 함.
     {
-        Debug.Log("GameReady Called");
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         while(manager.roomSlots.Count != players.Count)
         {
-            Debug.Log("GameReady: Error - Waiting for all players to be ready");
-            Debug.Log("GameReady: roomSlots.Count: " + manager.roomSlots.Count);
-            Debug.Log("GameReady: players.Count: " + players.Count);
             yield return null;
         }
-        Debug.Log("GameReady: Success - All players are ready");
-        Debug.Log("GameReady: roomSlots.Count: " + manager.roomSlots.Count);
-        Debug.Log("GameReady: players.Count: " + players.Count);
 
-        Debug.Log("GameReady: Allocating Imposters");
         // 임포스터 할당
         for(int i=0; i<manager.imposterCount; i++)
         {
@@ -50,9 +40,7 @@ public class GameSystem : NetworkBehaviour
                 i--;
             }
         }
-        Debug.Log("GameReady: Done Allocating Imposters");
         yield return new WaitForSeconds(1f);
-        Debug.Log("GameReady: Done WaitForSeconds(1f)");
         RpcStartGame();
     }
         

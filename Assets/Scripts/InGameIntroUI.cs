@@ -15,6 +15,9 @@ public class InGameIntroUI : MonoBehaviour
     private IntroCharacter myCharacter;
 
     [SerializeField]
+    private List<IntroCharacter> otherCharacters = new List<IntroCharacter>();
+
+    [SerializeField]
     private Color crewColor;
 
     [SerializeField]
@@ -22,7 +25,49 @@ public class InGameIntroUI : MonoBehaviour
 
     public void ShowPlayerType()
     {
+        var players = GameSystem.Instance.GetPlayerList();
+        InGameCharacterMover myPlayer = null;
+        foreach(var player in players)
+        {
+            if(player.isOwned)
+            {
+                myPlayer = player;
+                break;
+            }
+        }
+        myCharacter.SetIntroCharacter(myPlayer.nickname, myPlayer.playerColor); // SetActive는 안해도되나?
+
         
+        if(myPlayer.playerType == EPlayerType.Imposter)
+        {
+            playerType.text = "임포스터";
+            playerType.color = gradientImage.color = imposterColor;
+            int i=0;
+            foreach(var player in players)
+            {
+                if(!player.isOwned && player.playerType == EPlayerType.Imposter)
+                {
+                    otherCharacters[i].SetIntroCharacter(player.nickname, player.playerColor);
+                    otherCharacters[i].gameObject.SetActive(true);
+                    i++;
+                }
+            }
+        }
+        else
+        {
+            playerType.text = "크루원";
+            playerType.color = gradientImage.color = crewColor;
+            int i=0;
+            foreach(var player in players)
+            {
+                if(!player.isOwned)
+                {
+                    otherCharacters[i].SetIntroCharacter(player.nickname, player.playerColor);
+                    otherCharacters[i].gameObject.SetActive(true);
+                    i++;
+                }
+            }
+        }
     }
 
 

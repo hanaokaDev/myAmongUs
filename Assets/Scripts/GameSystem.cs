@@ -27,6 +27,7 @@ public class GameSystem : NetworkBehaviour
             yield return null;
         }
 
+        // 임포스터 할당
         for(int i=0; i<manager.imposterCount; i++)
         {
             var player = players[Random.Range(0, players.Count)];

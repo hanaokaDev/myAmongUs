@@ -22,7 +22,7 @@ public class GameSystem : NetworkBehaviour
         }
     }
 
-    private IEnumerator GameReady()
+    private IEnumerator GameReady() // server에서만 호출해야 함.
     {
         Debug.Log("GameReady Called");
         var manager = NetworkManager.singleton as AmongUsRoomManager;
@@ -64,7 +64,9 @@ public class GameSystem : NetworkBehaviour
 
     void Start()
     {
-        StartCoroutine(GameReady());
+        if(isServer){
+            StartCoroutine(GameReady());
+        }
     }
 
 

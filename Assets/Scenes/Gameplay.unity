@@ -14766,6 +14766,7 @@ GameObject:
   - component: {fileID: 1940065888}
   - component: {fileID: 1940065890}
   - component: {fileID: 1940065889}
+  - component: {fileID: 1940065891}
   m_Layer: 5
   m_Name: Intro
   m_TagString: Untagged
@@ -14831,6 +14832,7 @@ MonoBehaviour:
   - {fileID: 1142610808}
   crewColor: {r: 0.14901961, g: 0.7019608, b: 0.9960785, a: 1}
   imposterColor: {r: 0.9960785, g: 0, b: 0, a: 1}
+  canvasGroup: {fileID: 1940065891}
 --- !u!114 &1940065890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14861,6 +14863,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1940065891
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940065885}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1946883134
 GameObject:
   m_ObjectHideFlags: 0

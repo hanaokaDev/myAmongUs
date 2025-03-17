@@ -39,7 +39,7 @@ public class CharacterMover : NetworkBehaviour
     [SyncVar(hook = nameof(SetNickname_Hook))]
     public string nickname;
     [SerializeField]
-    private Text nicknameText;
+    protected Text nicknameText; // InGameCharacterMover에서 Imposter끼리는 적색으로 표시되는 기능구현을 위해 protected로 자식클래스에 한해서만 노출하였음.
     public void SetNickname_Hook(string _, string value)
     {
         nicknameText.text = value;

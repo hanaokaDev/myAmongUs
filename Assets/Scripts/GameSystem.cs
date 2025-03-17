@@ -69,6 +69,22 @@ public class GameSystem : NetworkBehaviour
     private IEnumerator StartGameCoroutine()
     {
         yield return StartCoroutine(InGameUIManager.Instance.InGameIntroUI.ShowIntroSequence());
+        
+        // 게임시작할 때, 본인 직업에 따라서 다른 플레이어 닉 색깔을 정하는 코드
+        InGameCharacterMover myCharacter = null;
+        foreach(var player in players)
+        {
+          if(player.isOwned)
+            {
+                myCharacter = player;
+                break;
+            }
+        }
+        foreach(var player in players)
+        {
+            player.SetNicknameColor(myCharacter.playerType);
+        } 
+
         yield return new WaitForSeconds(3f);
         InGameUIManager.Instance.InGameIntroUI.Close();
     }

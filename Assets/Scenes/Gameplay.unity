@@ -14321,6 +14321,7 @@ Transform:
   - {fileID: 549213794}
   - {fileID: 399791925}
   - {fileID: 36954429}
+  - {fileID: 1905368415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732944804
@@ -15183,6 +15184,134 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1905368414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905368415}
+  - component: {fileID: 1905368416}
+  m_Layer: 0
+  m_Name: Ship In Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1905368415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905368414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.96, y: 1.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1711840174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1905368416
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905368414}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.393254, y: 0.34137082}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.93254757, y: -0.68547106}
+      - {x: -1.5571337, y: -0.65696776}
+      - {x: -1.5784426, y: -2.2650096}
+      - {x: -0.85184956, y: -2.2357168}
+      - {x: -0.7271103, y: -1.6576353}
+      - {x: -0.2690344, y: -1.1235206}
+      - {x: 0.19152546, y: -1.1878464}
+      - {x: 0.55926037, y: -1.5163728}
+      - {x: 0.5511868, y: -3.482082}
+      - {x: -0.81426, y: -3.462229}
+      - {x: -0.8397746, y: -2.8614368}
+      - {x: -1.5989714, y: -2.837786}
+      - {x: -1.5851879, y: -4.6128435}
+      - {x: -0.90861607, y: -4.6308784}
+      - {x: -0.9042258, y: -5.4159155}
+      - {x: 0.7833197, y: -5.4389267}
+      - {x: 0.82324815, y: -6.831389}
+      - {x: 1.4407723, y: -6.858267}
+      - {x: 1.4408791, y: -3.580031}
+      - {x: 2.2100837, y: -3.5854974}
+      - {x: 2.2881262, y: -3.763035}
+      - {x: 3.9465785, y: -3.7706344}
+      - {x: 3.9736025, y: -3.8866892}
+      - {x: 3.3584714, y: -4.5236516}
+      - {x: 3.3542535, y: -5.4897814}
+      - {x: 2.8416667, y: -6.0356107}
+      - {x: 2.1487193, y: -6.0652504}
+      - {x: 2.1172578, y: -6.852053}
+      - {x: 3.8384159, y: -6.8445973}
+      - {x: 3.8231757, y: -4.9550567}
+      - {x: 4.618221, y: -4.198232}
+      - {x: 5.650953, y: -4.1722765}
+      - {x: 5.559408, y: -2.052593}
+      - {x: 4.412766, y: -2.0705245}
+      - {x: 3.1723723, y: -0.89181256}
+      - {x: 3.176156, y: 0.35361886}
+      - {x: 2.1779249, y: 0.3374412}
+      - {x: 2.2093208, y: 0.045511007}
+      - {x: 2.1568558, y: -0.37691045}
+      - {x: 2.9473968, y: -0.41654563}
+      - {x: 2.9502406, y: -1.2943356}
+      - {x: 3.8222537, y: -2.151487}
+      - {x: 3.8343723, y: -2.8721313}
+      - {x: 1.2658055, y: -2.927137}
+      - {x: 0.77596617, y: -2.3049622}
+      - {x: 0.81577265, y: -0.41637206}
+      - {x: 1.4196959, y: -0.41294175}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1909737789
 GameObject:
   m_ObjectHideFlags: 0

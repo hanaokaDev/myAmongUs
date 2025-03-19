@@ -8,14 +8,14 @@ public class GameRoomSettingsUI : SettingUI
     
     public void Open()
     {
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.IsMovable = false;
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = false;
         gameObject.SetActive(true);
     }
 
     public override void Close()
     {
         base.Close();
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.IsMovable = true;
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = true;
     }
 
     public void ExitGameRoom()

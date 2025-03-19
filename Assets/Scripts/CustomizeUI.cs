@@ -91,12 +91,12 @@ public class CustomizeUI : MonoBehaviour
 
     public void Open()
     {
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.IsMovable = false;
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = false;
         gameObject.SetActive(true);
     }
 
     public void Close(){
-        AmongUsRoomPlayer.MyRoomPlayer.lobbyPlayerCharacter.IsMovable = true;
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = true;
         gameObject.SetActive(false);
     }
 

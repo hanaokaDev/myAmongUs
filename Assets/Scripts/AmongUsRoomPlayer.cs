@@ -36,7 +36,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     
 
 
-    public CharacterMover lobbyPlayerCharacter;
+    public CharacterMover myCharacter;
 
     public override void Start() // override 빠져있어서 추가함.
     {
@@ -82,7 +82,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     public void CmdSetNickname(string nick)
     {
         nickname = nick;
-        lobbyPlayerCharacter.nickname = nick;
+        myCharacter.nickname = nick;
     }
 
 
@@ -90,7 +90,7 @@ public class AmongUsRoomPlayer : NetworkRoomPlayer
     public void CmdSetPlayerColor(EPlayerColor color)
     {
         playerColor = color;
-        lobbyPlayerCharacter.playerColor = color; // 자기자신을 굳이 찾지 말고, netId를 통해 기존에 저장해놓은 스스로를 바꾼다.
+        myCharacter.playerColor = color; // 자기자신을 굳이 찾지 말고, netId를 통해 기존에 저장해놓은 스스로를 바꾼다.
     }
 
 

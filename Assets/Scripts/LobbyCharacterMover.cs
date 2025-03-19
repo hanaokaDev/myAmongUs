@@ -6,7 +6,7 @@ using Mirror;
 // 클라이언트측에서 사용하는 클래스.
 public class LobbyCharacterMover : CharacterMover
 {
-    // AmongUsRoomPlayer.cs의 lobbyPlayerCharacter 를 채우기 위함.
+    // AmongUsRoomPlayer.cs의 myCharacter 를 채우기 위함.
     // SpawnLobbyPlayerCharacter 함수에서 LobbyPlayer를 생성할 때 해당 멤버변수를 채울 의도.
     [SyncVar(hook = nameof(SetOwnerNetId_Hook))]
     public uint ownerNetId; 
@@ -16,7 +16,7 @@ public class LobbyCharacterMover : CharacterMover
         var players = FindObjectsOfType<AmongUsRoomPlayer>();
         foreach(var player in players){
             if(player.netId == newOwnerId){
-                player.lobbyPlayerCharacter = this;
+                player.myCharacter = this;
                 break;
             }
         }

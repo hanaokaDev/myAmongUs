@@ -25,9 +25,13 @@ public class GameSystem : NetworkBehaviour
         }
     }
 
+    [SyncVar]
+    public float killCoolDown;
+
     private IEnumerator GameReady() // server에서만 호출해야 함.
     {
         var manager = NetworkManager.singleton as AmongUsRoomManager;
+        killCoolDown = manager.gameRuleData.killCoolDown;
         while(manager.roomSlots.Count != players.Count)
         {
             yield return null;
@@ -58,6 +62,11 @@ public class GameSystem : NetworkBehaviour
 
         yield return new WaitForSeconds(1f);
         RpcStartGame();
+
+        foreach(var player in players)
+        {
+            player.SetKillCoolDown();
+        }
     }
         
     // GameReady에서 Client도 실행해야하는부분을 여기로 뺌.

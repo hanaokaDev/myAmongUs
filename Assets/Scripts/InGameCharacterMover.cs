@@ -17,9 +17,20 @@ public class InGameCharacterMover : CharacterMover
     private void SetPlayerType_Hook(EPlayerType _, EPlayerType type)
     {
         if(isOwned && type == EPlayerType.Imposter){
-            InGameUIManager.Instance.KillButtonUI.Show();
+            InGameUIManager.Instance.KillButtonUI.Show(this);
         }
     }
+
+    [SyncVar]
+    private float killCoolDown;
+    public float KillCoolDown
+    {
+        get { return killCoolDown; }
+    }
+    public bool isKillable{
+        get { return killCoolDown < 0f; }
+    }
+
 
     [ClientRpc]
     public void RpcTeleport(Vector3 position)
@@ -31,6 +42,14 @@ public class InGameCharacterMover : CharacterMover
     {
         if(playerType == EPlayerType.Imposter && type == EPlayerType.Imposter){
             nicknameText.color = Color.red;
+        }
+    }
+
+    public void SetKillCoolDown()
+    {
+        if(isServer)
+        {
+            killCoolDown = GameSystem.Instance.killCoolDown;
         }
     }
 
@@ -47,6 +66,12 @@ public class InGameCharacterMover : CharacterMover
         GameSystem.Instance.AddPlayer(this);
     }
 
+    public void Update()
+    {
+        if(isServer && playerType == EPlayerType.Imposter){
+            killCoolDown -= Time.deltaTime;
+        }
+    }
 
 
     [Command]

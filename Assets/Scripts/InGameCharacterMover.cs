@@ -12,8 +12,14 @@ public enum EPlayerType
 
 public class InGameCharacterMover : CharacterMover
 {
-    [SyncVar]
+    [SyncVar(hook = nameof(SetPlayerType_Hook))]
     public EPlayerType playerType;
+    private void SetPlayerType_Hook(EPlayerType _, EPlayerType type)
+    {
+        if(isOwned && type == EPlayerType.Imposter){
+            InGameUIManager.Instance.KillButtonUI.Show();
+        }
+    }
 
     [ClientRpc]
     public void RpcTeleport(Vector3 position)

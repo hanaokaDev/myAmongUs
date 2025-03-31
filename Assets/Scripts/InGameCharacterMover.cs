@@ -102,6 +102,7 @@ public class InGameCharacterMover : CharacterMover
         }
         if(target != null)
         {
+            RpcTeleport(target.transform.position); // 킬대상 위치로 임포스터가 순간이동해야 함.
             var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
             var deadbody = Instantiate(manager.spawnPrefabs[1], target.transform.position, target.transform.rotation).GetComponent<DeadBody>();
             NetworkServer.Spawn(deadbody.gameObject);

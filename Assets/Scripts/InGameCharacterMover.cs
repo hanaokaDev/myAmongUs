@@ -18,8 +18,11 @@ public class InGameCharacterMover : CharacterMover
     {
         if(isOwned && type == EPlayerType.Imposter){
             InGameUIManager.Instance.KillButtonUI.Show(this);
+            playerFinder.SetKillRange((float)GameSystem.Instance.killRange + 1f);
         }
     }
+    [SerializeField]
+    private PlayerFinder playerFinder;
 
     [SyncVar]
     private float killCoolDown;
@@ -28,7 +31,7 @@ public class InGameCharacterMover : CharacterMover
         get { return killCoolDown; }
     }
     public bool isKillable{
-        get { return killCoolDown < 0f; }
+        get { return killCoolDown < 0f && playerFinder.targets.Count != 0; }
     }
 
 

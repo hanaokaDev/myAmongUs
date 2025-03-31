@@ -28,10 +28,14 @@ public class GameSystem : NetworkBehaviour
     [SyncVar]
     public float killCoolDown;
 
+    [SyncVar]
+    public EKillRange killRange; // killRange는 SyncVar로 선언하여, 서버에서 클라이언트에게 동기화할 수 있도록 한다.
+
     private IEnumerator GameReady() // server에서만 호출해야 함.
     {
         var manager = NetworkManager.singleton as AmongUsRoomManager;
         killCoolDown = manager.gameRuleData.killCoolDown;
+        killRange = manager.gameRuleData.killRange;
         while(manager.roomSlots.Count != players.Count)
         {
             yield return null;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 82769375926924888}
   - component: {fileID: 5737465202976118249}
+  - component: {fileID: 1466467730056095517}
   m_Layer: 10
   m_Name: Player Finder
   m_TagString: Untagged
@@ -68,6 +69,19 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.44
+--- !u!114 &1466467730056095517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3219900838872219836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5adcd3951856f4f8e81b5c488fb23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
 --- !u!1 &4528875144312768013
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,3 +544,4 @@ MonoBehaviour:
   characterSize: 0.36
   cameraSize: 1.48
   playerType: 0
+  playerFinder: {fileID: 1466467730056095517}

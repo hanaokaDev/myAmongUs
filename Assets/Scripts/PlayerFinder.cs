@@ -41,4 +41,20 @@ public class PlayerFinder : MonoBehaviour
         }
     }
 
+    public InGameCharacterMover GetFirstTarget()
+    {
+        float dist = float.MaxValue;
+        InGameCharacterMover closeTarget = null;
+        foreach(var target in targets)
+        {
+            float newDist = Vector3.Distance(transform.position, target.transform.position);
+            if(newDist < dist)
+            {
+                dist = newDist;
+                closeTarget = target;
+            }
+        }
+        return closeTarget;
+    }
+
 }

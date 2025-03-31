@@ -76,11 +76,38 @@ public class InGameCharacterMover : CharacterMover
         }
     }
 
-
     [Command]
     void CmdSetPlayerCharacter(string nickname, EPlayerColor playerColor)
     {
         this.nickname = nickname;
         this.playerColor = playerColor;
+    }
+
+    public void Kill()
+    {
+        CmdKill(playerFinder.GetFirstTarget().netId);
+    }
+
+    [Command]
+    public void CmdKill(uint targetNetId)
+    {
+        InGameCharacterMover target = null;
+        foreach(var player in GameSystem.Instance.players)
+        {
+            if(player.netId == targetNetId)
+            {
+                target = player;
+                break;
+            }
+        }
+        if(target != null)
+        {
+            var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
+            var deadbody = Instantiate(manager.spawnPrefabs[1], target.transform.position, target.transform.rotation).GetComponent<DeadBody>();
+            NetworkServer.Spawn(deadbody.gameObject);
+            deadbody.RpcSetColor(target.playerColor);
+            killCoolDown = GameSystem.Instance.killCoolDown; 
+        }
+
     }
 }

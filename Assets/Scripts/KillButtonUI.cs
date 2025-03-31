@@ -33,4 +33,9 @@ public class KillButtonUI : MonoBehaviour
             }
         }
     }
+
+    public void OnClickKillButton()
+    {
+        targetPlayer.Kill();
+    }
 }

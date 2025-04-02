@@ -103,12 +103,26 @@ public class InGameCharacterMover : CharacterMover
         if(target != null)
         {
             RpcTeleport(target.transform.position); // 킬대상 위치로 임포스터가 순간이동해야 함.
-            var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
-            var deadbody = Instantiate(manager.spawnPrefabs[1], target.transform.position, target.transform.rotation).GetComponent<DeadBody>();
-            NetworkServer.Spawn(deadbody.gameObject);
-            deadbody.RpcSetColor(target.playerColor);
+            target.Dead(playerColor); // 킬대상 죽이는 기능은 임포스터가 호출
             killCoolDown = GameSystem.Instance.killCoolDown; 
         }
 
+    }
+    public void Dead(EPlayerColor imposterColor) 
+    {
+        RpcDead(imposterColor, playerColor); // 죽는 애니메이션 띄우기는 크루원측에서 호출
+        var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
+        var deadbody = Instantiate(manager.spawnPrefabs[1], transform.position, transform.rotation).GetComponent<DeadBody>();
+        NetworkServer.Spawn(deadbody.gameObject);
+        deadbody.RpcSetColor(playerColor);
+    }
+
+    [ClientRpc]
+    private void RpcDead(EPlayerColor imposterColor, EPlayerColor crewColor) // 죽는처리는 크루원이 호출
+    {
+        if(isOwned)
+        {
+            InGameUIManager.Instance.KillUI.Open(imposterColor, crewColor);
+        }
     }
 }

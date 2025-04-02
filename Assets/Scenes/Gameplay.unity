@@ -2627,6 +2627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameIntroUI: {fileID: 1940065889}
   killButtonUI: {fileID: 1751228917}
+  killUI: {fileID: 897220914}
 --- !u!1 &194214862
 GameObject:
   m_ObjectHideFlags: 0
@@ -10699,6 +10700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897220912}
   - component: {fileID: 897220913}
+  - component: {fileID: 897220914}
   m_Layer: 5
   m_Name: Kill UI
   m_TagString: Untagged
@@ -10750,6 +10752,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &897220914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897220911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff4cd9823b4f2d4ca68453391aa30ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imposterImg: {fileID: 1101545661}
+  crewmateImg: {fileID: 546794534}
+  material: {fileID: 2100000, guid: c37734c7b9f77bf42b05e2cbe7d53c81, type: 2}
 --- !u!1 &897931549
 GameObject:
   m_ObjectHideFlags: 0

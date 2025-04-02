@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CharacterMover : NetworkBehaviour
 {
-    private Animator animator;
+    protected Animator animator;
 
     private bool isMovable; // property로 바꿈. 의도는, isMovable이 false가 되면 animator도 꺼버리게 하기 위함.
     public bool IsMovable
@@ -24,7 +24,7 @@ public class CharacterMover : NetworkBehaviour
     [SyncVar] // Network로 동기화되도록
     public float speed = 2f;
 
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer; // Ghost를 위해서, 상속클래스에서 해당 알파값 변경하기 위해 protected로 선언함.
 
     [SyncVar(hook = nameof(SetPlayerColor_Hook))]
     public EPlayerColor playerColor;

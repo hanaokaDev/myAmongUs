@@ -4,10 +4,21 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
+// 0x00: 크루원
+// 0x01: 임포스터
+// 0x02: 죽은 크루원
+// 0x03: 죽은 임포스터
 public enum EPlayerType
 {
-    Crew,
-    Imposter
+    Crew=0,
+    Imposter=1,
+    Ghost=2,
+
+    Crew_Alive = 0,
+    Imposter_Alive = 1,
+    Crew_Ghost = 2,
+    Imposter_Ghost = 3,
+
 }
 
 public class InGameCharacterMover : CharacterMover
@@ -122,7 +133,19 @@ public class InGameCharacterMover : CharacterMover
     {
         if(isOwned)
         {
+            animator.SetBool("isGhost", true);
             InGameUIManager.Instance.KillUI.Open(imposterColor, crewColor);
+        }
+        else
+        {
+            var myPlayer = AmongUsRoomPlayer.MyRoomPlayer.myCharacter as InGameCharacterMover;
+            if(((int)myPlayer.playerType & 0x02) != (int)EPlayerType.Ghost) // 아직 내가 죽지 않았는데 상대방이 Ghost라면, 상대방이 나에게 보여서는 안됨.
+            {
+                var color = PlayerColor.GetColor(playerColor);
+                color.a = 0f; // 아예 보이지 않게 알파값 0으로 설정. 이 값은 Shader(M_Crew) 를 통해서 최종출력결과물이 Alpha 0 으로 나가게끔 관여함.
+                spriteRenderer.material.SetColor("_PlayerColor", color); // 죽은 크루원은 보이지 않게끔 처리.
+                nicknameText.text = ""; // 닉네임도 보이지 않게 숨김처리
+            }
         }
     }
 }

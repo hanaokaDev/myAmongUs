@@ -121,6 +121,7 @@ public class InGameCharacterMover : CharacterMover
     }
     public void Dead(EPlayerColor imposterColor) 
     {
+        playerType |= EPlayerType.Ghost;
         RpcDead(imposterColor, playerColor); // 죽는 애니메이션 띄우기는 크루원측에서 호출
         var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
         var deadbody = Instantiate(manager.spawnPrefabs[1], transform.position, transform.rotation).GetComponent<DeadBody>();
@@ -135,17 +136,42 @@ public class InGameCharacterMover : CharacterMover
         {
             animator.SetBool("isGhost", true);
             InGameUIManager.Instance.KillUI.Open(imposterColor, crewColor);
+
+            // 내가 죽었을때는 유령플레이어들을 보이게 만들어줘야함.
+            var players = GameSystem.Instance.players;
+            foreach(var player in players)
+            {
+                if(EPlayerType.Ghost == (player.playerType & EPlayerType.Ghost)) // 나를 제외한 유령들만 보이게끔 처리.
+                {
+                    player.SetVisibility(true);
+                }
+            }
         }
         else
         {
             var myPlayer = AmongUsRoomPlayer.MyRoomPlayer.myCharacter as InGameCharacterMover;
             if(((int)myPlayer.playerType & 0x02) != (int)EPlayerType.Ghost) // 아직 내가 죽지 않았는데 상대방이 Ghost라면, 상대방이 나에게 보여서는 안됨.
             {
-                var color = PlayerColor.GetColor(playerColor);
-                color.a = 0f; // 아예 보이지 않게 알파값 0으로 설정. 이 값은 Shader(M_Crew) 를 통해서 최종출력결과물이 Alpha 0 으로 나가게끔 관여함.
-                spriteRenderer.material.SetColor("_PlayerColor", color); // 죽은 크루원은 보이지 않게끔 처리.
-                nicknameText.text = ""; // 닉네임도 보이지 않게 숨김처리
+                SetVisibility(false); // 상대방이 죽었으니 나에게는 보이지 않게끔 처리.
             }
+        }
+    }
+
+    public void SetVisibility(bool isVisible)
+    {
+        if(isVisible)
+        {
+            var color = PlayerColor.GetColor(playerColor);
+            color.a = 1f;
+            spriteRenderer.material.SetColor("_PlayerColor", color);
+            nicknameText.text = nickname;
+        }
+        else
+        {
+            var color = PlayerColor.GetColor(playerColor);
+            color.a = 0f; // 아예 보이지 않게 알파값 0으로 설정. 이 값은 Shader(M_Crew) 를 통해서 최종출력결과물이 Alpha 0 으로 나가게끔 관여함.
+            spriteRenderer.material.SetColor("_PlayerColor", color); // 죽은 크루원은 보이지 않게끔 처리.
+            nicknameText.text = ""; // 닉네임도 보이지 않게 숨김처리
         }
     }
 }

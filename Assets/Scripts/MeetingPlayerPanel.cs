@@ -40,13 +40,25 @@ public class MeetingPlayerPanel : MonoBehaviour
             nicknameText.color = Color.red;
         }
         
-        deadPlayerBlock.SetActive((targetPlayer.playerType & EPlayerType.Ghost) == EPlayerType.Ghost);
+        bool isDead = (targetPlayer.playerType & EPlayerType.Ghost) == EPlayerType.Ghost;
+        deadPlayerBlock.SetActive(isDead);
+        GetComponent<Button>().interactable = !isDead; // 자신이 죽은 유령플레이어라면, MeetingPlayerPanel에서 클릭기능자체를 제거함.
         reportSign.SetActive(targetPlayer.isReporter);
 
     }
 
     public void OnClickPlayerPanel()
     {
-        voteButtons.SetActive(true);
+        var myCharacter = AmongUsRoomPlayer.MyRoomPlayer.myCharacter as InGameCharacterMover;
+        if((myCharacter.playerType & EPlayerType.Ghost) != EPlayerType.Ghost){
+            // 지금 Panel의 player가 생존했을때만 투표대상이 된다
+            InGameUIManager.Instance.MeetingUI.SelectPlayerPanel(); // 기존 O/X 창은 싹다 없애고
+            voteButtons.SetActive(true); // 지금 클릭한 O/X 창만 활성화한다.
+        }
+    }
+
+    public void Unselect()
+    {
+        voteButtons.SetActive(false);
     }
 }

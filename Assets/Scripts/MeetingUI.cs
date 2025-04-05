@@ -34,4 +34,12 @@ public class MeetingUI : MonoBehaviour
         }
 
     }
+
+    public void SelectPlayerPanel()
+    {
+        foreach(var panel in meetingPlayerPanels)
+        {
+            panel.Unselect();
+        }
+    }
 }

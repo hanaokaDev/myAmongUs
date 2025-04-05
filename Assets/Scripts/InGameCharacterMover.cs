@@ -45,6 +45,8 @@ public class InGameCharacterMover : CharacterMover
         get { return killCoolDown < 0f && playerFinder.targets.Count != 0; }
     }
 
+    public EPlayerColor foundDeadbodyColor;
+
 
     [ClientRpc]
     public void RpcTeleport(Vector3 position)
@@ -162,6 +164,16 @@ public class InGameCharacterMover : CharacterMover
         }
     }
 
+    public void Report()
+    {
+        CmdReport(foundDeadbodyColor);
+    }
+    [Command] // cmdReport 함수를 통해, 서버로 전달된 deadbody색을 다른 플레이어에게 전파한다.
+    public void CmdReport(EPlayerColor deadbodyColor)
+    {
+        GameSystem.Instance.StartReportMeeting(deadbodyColor);
+    }
+
     public void SetVisibility(bool isVisible)
     {
         if(isVisible)
@@ -179,4 +191,6 @@ public class InGameCharacterMover : CharacterMover
             nicknameText.text = ""; // 닉네임도 보이지 않게 숨김처리
         }
     }
+
+
 }

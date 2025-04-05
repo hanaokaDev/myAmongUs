@@ -2630,6 +2630,7 @@ MonoBehaviour:
   killButtonUI: {fileID: 1751228917}
   killUI: {fileID: 897220914}
   reportButtonUI: {fileID: 1849274637}
+  reportUI: {fileID: 1749572018}
 --- !u!1 &194214862
 GameObject:
   m_ObjectHideFlags: 0
@@ -19041,13 +19042,14 @@ GameObject:
   - component: {fileID: 1749572015}
   - component: {fileID: 1749572017}
   - component: {fileID: 1749572016}
+  - component: {fileID: 1749572018}
   m_Layer: 5
   m_Name: Report UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1749572015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19109,6 +19111,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749572014}
   m_CullTransparentMesh: 1
+--- !u!114 &1749572018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749572014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b60e8cf2793d94488e59b12e3f13fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadbodyImage: {fileID: 1801966105}
+  material: {fileID: 2100000, guid: c37734c7b9f77bf42b05e2cbe7d53c81, type: 2}
 --- !u!1 &1751228912
 GameObject:
   m_ObjectHideFlags: 0
@@ -19929,7 +19945,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1849274635}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1849274637}
+        m_TargetAssemblyTypeName: ReportButtonUI, Assembly-CSharp
+        m_MethodName: OnClickButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1849274635
 MonoBehaviour:
   m_ObjectHideFlags: 0

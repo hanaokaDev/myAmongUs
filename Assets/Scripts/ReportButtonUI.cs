@@ -13,4 +13,10 @@ public class ReportButtonUI : MonoBehaviour
         reportButton.interactable = isInteractable;
     }
     
+
+    public void OnClickButton()
+    {
+        var myCharacter = AmongUsRoomPlayer.MyRoomPlayer.myCharacter as InGameCharacterMover;
+        myCharacter.Report();
+    }
 }

@@ -120,4 +120,14 @@ public class GameSystem : NetworkBehaviour
     {
         Instance = this;
     }
+
+    public void StartReportMeeting(EPlayerColor deadbodyColor)
+    {
+        RpcStartReportMeeting(deadbodyColor);
+    }
+    [ClientRpc]
+    public void RpcStartReportMeeting(EPlayerColor deadbodyColor)
+    {
+        InGameUIManager.Instance.ReportUI.Open(deadbodyColor);   
+    }
 }

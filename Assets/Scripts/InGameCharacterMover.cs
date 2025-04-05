@@ -219,4 +219,12 @@ public class InGameCharacterMover : CharacterMover
         }
         ejectedPlayer.voteCount += 1;
     }
+
+    [Command]
+    public void CmdSkipVote()
+    {
+        isVote = true;
+        GameSystem.Instance.skipVotePlayerCount += 1;
+        GameSystem.Instance.RpcSignSkipVote(playerColor);
+    }
 }

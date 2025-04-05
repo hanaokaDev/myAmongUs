@@ -31,6 +31,9 @@ public class GameSystem : NetworkBehaviour
     [SyncVar]
     public EKillRange killRange; // killRange는 SyncVar로 선언하여, 서버에서 클라이언트에게 동기화할 수 있도록 한다.
 
+    [SyncVar]
+    public int skipVotePlayerCount;
+
     private IEnumerator GameReady() // server에서만 호출해야 함.
     {
         var manager = NetworkManager.singleton as AmongUsRoomManager;
@@ -144,4 +147,10 @@ public class GameSystem : NetworkBehaviour
     {
         InGameUIManager.Instance.MeetingUI.UpdateVote(voterColor, ejectColor);
     } 
+
+    [ClientRpc]
+    public void RpcSignSkipVote(EPlayerColor skipVotePlayerColor)
+    {
+        InGameUIManager.Instance.MeetingUI.UpdateSkipVotePlayer(skipVotePlayerColor);
+    }
 }

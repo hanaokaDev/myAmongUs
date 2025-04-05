@@ -45,6 +45,9 @@ public class InGameCharacterMover : CharacterMover
         get { return killCoolDown < 0f && playerFinder.targets.Count != 0; }
     }
 
+    [SyncVar]
+    public bool isReporter = false;
+
     public EPlayerColor foundDeadbodyColor;
 
 
@@ -171,6 +174,7 @@ public class InGameCharacterMover : CharacterMover
     [Command] // cmdReport 함수를 통해, 서버로 전달된 deadbody색을 다른 플레이어에게 전파한다.
     public void CmdReport(EPlayerColor deadbodyColor)
     {
+        isReporter = true;
         GameSystem.Instance.StartReportMeeting(deadbodyColor);
     }
 

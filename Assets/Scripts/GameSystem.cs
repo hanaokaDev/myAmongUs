@@ -129,5 +129,13 @@ public class GameSystem : NetworkBehaviour
     public void RpcStartReportMeeting(EPlayerColor deadbodyColor)
     {
         InGameUIManager.Instance.ReportUI.Open(deadbodyColor);   
+        StartCoroutine(StartMeeting_Coroutine()); // 3초동안 리포트UI 띄워준 후 닫고, 회의창으로 이동
+    }
+
+    private IEnumerator StartMeeting_Coroutine()
+    {
+        yield return new WaitForSeconds(3f);
+        InGameUIManager.Instance.ReportUI.Close();
+        InGameUIManager.Instance.MeetingUI.Open();
     }
 }

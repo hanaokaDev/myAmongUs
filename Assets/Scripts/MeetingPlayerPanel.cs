@@ -35,6 +35,10 @@ public class MeetingPlayerPanel : MonoBehaviour
         var voter = Instantiate(voterPrefab, voterParentTransform).GetComponent<Image>();
         voter.material = Instantiate(voter.material);
         voter.material.SetColor("_PlayerColor", PlayerColor.GetColor(voterColor));
+    }
+
+    public void OpenResult() // 투표가 종료된 이후에만 결과가 공개되어야 한다.
+    {
         voterParentTransform.gameObject.SetActive(true);
     }
 

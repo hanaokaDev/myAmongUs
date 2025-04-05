@@ -20,8 +20,17 @@ public class MeetingUI : MonoBehaviour
     [SerializeField]
     private Transform skipVoteParentTransform;
 
+    [SerializeField]
+    private Text meetingTimeText;
+
+    private EMeetingState meetingState;
+
     private List<MeetingPlayerPanel> meetingPlayerPanels = new List<MeetingPlayerPanel>();
 
+    public void ChangeMeetingState(EMeetingState nextState)
+    {
+        meetingState = nextState;
+    }
 
     public void Open()
     {
@@ -81,7 +90,6 @@ public class MeetingUI : MonoBehaviour
         voter.material = Instantiate(voter.material);
         voter.material.SetColor("_PlayerColor", PlayerColor.GetColor(skipVotePlayerColor));
         skipVoteButton.SetActive(false);
-        skipVotePlayers.SetActive(true);
     }
 
     public void OnClickSkipVoteButton()
@@ -89,5 +97,34 @@ public class MeetingUI : MonoBehaviour
         var myCharacter = AmongUsRoomPlayer.MyRoomPlayer.myCharacter as InGameCharacterMover;
         if(myCharacter.isVote) return; // 이미 투표를 한 상태라면, 더이상 투표를 할 수 없다.
         myCharacter.CmdSkipVote(); // 투표를 skip하였음을 알린다.
+        SelectPlayerPanel();
     }
+
+    public void CompleteVote()
+    {
+        foreach(var panel in meetingPlayerPanels)
+        {
+            panel.OpenResult();
+        }
+        skipVotePlayers.SetActive(true); // 기권한 플레이어 노출은 투표종료시에만.
+    }
+
+    private void Update()
+    {
+        if(meetingState == EMeetingState.Meeting)
+        {
+            meetingTimeText.text = string.Format("회의시간: {0}s", (int)Mathf.Clamp(GameSystem.Instance.remainTime, 0f, float.MaxValue));
+        }
+        else if(meetingState == EMeetingState.Vote)
+        {
+            meetingTimeText.text = string.Format("투표시간: {0}s", (int)Mathf.Clamp(GameSystem.Instance.remainTime, 0f, float.MaxValue));
+        }
+    }
+}
+
+public enum EMeetingState
+{
+    None,
+    Meeting,
+    Vote,
 }

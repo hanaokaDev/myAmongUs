@@ -407,7 +407,7 @@ public struct GameRuleData
     public bool confirmEjects;
     public int emergencyMeetings;
     public int emergencyMeetingsCooldown;
-    public int meetingsTime;
+    public float meetingsTime;
     public int voteTime;
     public bool anonymousVotes;
     public float moveSpeed;

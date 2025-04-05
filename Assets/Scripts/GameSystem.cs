@@ -138,4 +138,10 @@ public class GameSystem : NetworkBehaviour
         InGameUIManager.Instance.ReportUI.Close();
         InGameUIManager.Instance.MeetingUI.Open();
     }
+
+    [ClientRpc]
+    public void RpcSignVoteEject(EPlayerColor voterColor, EPlayerColor ejectColor)
+    {
+        InGameUIManager.Instance.MeetingUI.UpdateVote(voterColor, ejectColor);
+    } 
 }

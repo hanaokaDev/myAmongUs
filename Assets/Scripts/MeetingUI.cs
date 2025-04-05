@@ -42,4 +42,20 @@ public class MeetingUI : MonoBehaviour
             panel.Unselect();
         }
     }
+
+    public void UpdateVote(EPlayerColor voterColor, EPlayerColor ejectColor)
+    {
+        foreach(var panel in meetingPlayerPanels)
+        {
+            if(panel.targetPlayer.playerColor == ejectColor)
+            {
+                panel.UpdatePanel(voterColor);
+            }
+
+            if(panel.targetPlayer.playerColor == voterColor)
+            {
+                panel.UpdateVoteSign(true);
+            }
+        }
+    }
 }

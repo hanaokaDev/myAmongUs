@@ -48,6 +48,12 @@ public class InGameCharacterMover : CharacterMover
     [SyncVar]
     public bool isReporter = false;
 
+    [SyncVar]
+    public bool isVote;
+
+    [SyncVar]
+    public int voteCount;
+
     public EPlayerColor foundDeadbodyColor;
 
 
@@ -196,5 +202,20 @@ public class InGameCharacterMover : CharacterMover
         }
     }
 
+    public void CmdVoteEjectPlayer(EPlayerColor ejectColor)
+    {
+        isVote = true;
+        GameSystem.Instance.RpcSignVoteEject(playerColor, ejectColor);
 
+        var players = FindObjectsOfType<InGameCharacterMover>();;
+        InGameCharacterMover ejectPlayer = null;
+        for(int i=0; i<players.Length; i++)
+        {
+            if(players[i].playerColor == ejectColor)
+            {
+                ejectPlayer = players[i];
+            }
+        }
+        ejectPlayer.voteCount += 1;
+    }
 }

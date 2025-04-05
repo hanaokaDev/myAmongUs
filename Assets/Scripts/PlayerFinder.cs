@@ -17,6 +17,12 @@ public class PlayerFinder : MonoBehaviour
         circleCollider.radius = range;
     }
 
+    private void Update()
+    {
+
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var player = collision.GetComponent<InGameCharacterMover>();
@@ -47,6 +53,11 @@ public class PlayerFinder : MonoBehaviour
         InGameCharacterMover closeTarget = null;
         foreach(var target in targets)
         {
+            if(EPlayerType.Crew_Alive != target.playerType)
+            {
+                targets.Remove(target);
+                continue;
+            }
             float newDist = Vector3.Distance(transform.position, target.transform.position);
             if(newDist < dist)
             {

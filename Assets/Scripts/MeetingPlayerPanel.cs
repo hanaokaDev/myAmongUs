@@ -17,6 +17,10 @@ public class MeetingPlayerPanel : MonoBehaviour
     [SerializeField]
     private GameObject reportSign;
 
+    [SerializeField]
+    private GameObject voteButtons;
+
+    [HideInInspector]
     public InGameCharacterMover targetPlayer;
 
     public void SetPlayer(InGameCharacterMover target)
@@ -39,5 +43,10 @@ public class MeetingPlayerPanel : MonoBehaviour
         deadPlayerBlock.SetActive((targetPlayer.playerType & EPlayerType.Ghost) == EPlayerType.Ghost);
         reportSign.SetActive(targetPlayer.isReporter);
 
+    }
+
+    public void OnClickPlayerPanel()
+    {
+        voteButtons.SetActive(true);
     }
 }

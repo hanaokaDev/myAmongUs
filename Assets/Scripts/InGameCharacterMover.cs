@@ -202,20 +202,21 @@ public class InGameCharacterMover : CharacterMover
         }
     }
 
+    [Command]
     public void CmdVoteEjectPlayer(EPlayerColor ejectColor)
     {
         isVote = true;
         GameSystem.Instance.RpcSignVoteEject(playerColor, ejectColor);
 
-        var players = FindObjectsOfType<InGameCharacterMover>();;
-        InGameCharacterMover ejectPlayer = null;
+        var players = FindObjectsOfType<InGameCharacterMover>();
+        InGameCharacterMover ejectedPlayer = null;
         for(int i=0; i<players.Length; i++)
         {
             if(players[i].playerColor == ejectColor)
             {
-                ejectPlayer = players[i];
+                ejectedPlayer = players[i];
             }
         }
-        ejectPlayer.voteCount += 1;
+        ejectedPlayer.voteCount += 1;
     }
 }

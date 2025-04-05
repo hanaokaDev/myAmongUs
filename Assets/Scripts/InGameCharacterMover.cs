@@ -155,6 +155,11 @@ public class InGameCharacterMover : CharacterMover
                 SetVisibility(false); // 상대방이 죽었으니 나에게는 보이지 않게끔 처리.
             }
         }
+
+        var collider = GetComponent<BoxCollider2D>();
+        if(collider){
+            collider.enabled = false; // 죽은 크루원은 충돌처리 안되게끔 처리.
+        }
     }
 
     public void SetVisibility(bool isVisible)

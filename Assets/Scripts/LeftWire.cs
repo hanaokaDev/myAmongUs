@@ -24,19 +24,23 @@ public class LeftWire : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.right, 1f);
             if(hit.collider != null)
             {
-                var left = hit.collider.GetComponent<LeftWire>();
+                var left = hit.collider.GetComponentInParent<LeftWire>();
                 if(left != null)
                 {
                     mSelectedWire = left;
                 }
             }
+            else
+            {
+            }
         }
 
         // 마우스 떼면 원상복구
-        if(Input.GetMouseButton(0) && mSelectedWire != null)
+        if(Input.GetMouseButtonUp(0))
         {
             if(mSelectedWire != null)
             {
@@ -52,10 +56,6 @@ public class LeftWire : MonoBehaviour
             float distance = Vector2.Distance(mWireBody.transform.position, Input.mousePosition) - offset;
             mWireBody.localRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             mWireBody.sizeDelta = new Vector2(distance * (1/mGameCanvas.transform.localScale.x), mWireBody.sizeDelta.y);
-
-
         }
     }
-
-
 }

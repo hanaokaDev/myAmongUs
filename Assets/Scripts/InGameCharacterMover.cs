@@ -125,28 +125,37 @@ public class InGameCharacterMover : CharacterMover
         if(target != null)
         {
             RpcTeleport(target.transform.position); // 킬대상 위치로 임포스터가 순간이동해야 함.
-            target.Dead(playerColor); // 킬대상 죽이는 기능은 임포스터가 호출
+            target.Dead(false, playerColor); // 킬대상 죽이는 기능은 임포스터가 호출
             killCoolDown = GameSystem.Instance.killCoolDown; 
         }
 
     }
-    public void Dead(EPlayerColor imposterColor) 
+    public void Dead(bool isEject, EPlayerColor imposterColor)
     {
+
         playerType |= EPlayerType.Ghost;
-        RpcDead(imposterColor, playerColor); // 죽는 애니메이션 띄우기는 크루원측에서 호출
-        var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
-        var deadbody = Instantiate(manager.spawnPrefabs[1], transform.position, transform.rotation).GetComponent<DeadBody>();
-        NetworkServer.Spawn(deadbody.gameObject);
-        deadbody.RpcSetColor(playerColor);
+        RpcDead(isEject, imposterColor, playerColor); // 죽는 애니메이션 띄우기는 크루원측에서 호출
+
+        // 투표로 사출당해 죽은것이면 시체생성하지않음.
+        if(!isEject)
+        {   
+            var manager = NetworkRoomManager.singleton as AmongUsRoomManager;
+            var deadbody = Instantiate(manager.spawnPrefabs[1], transform.position, transform.rotation).GetComponent<DeadBody>();
+            NetworkServer.Spawn(deadbody.gameObject);
+            deadbody.RpcSetColor(playerColor);
+        }
     }
 
     [ClientRpc]
-    private void RpcDead(EPlayerColor imposterColor, EPlayerColor crewColor) // 죽는처리는 크루원이 호출
+    private void RpcDead(bool isEject, EPlayerColor imposterColor, EPlayerColor crewColor) // 죽는처리는 크루원이 호출
     {
         if(isOwned)
         {
             animator.SetBool("isGhost", true);
-            InGameUIManager.Instance.KillUI.Open(imposterColor, crewColor);
+            if(!isEject)
+            {
+                InGameUIManager.Instance.KillUI.Open(imposterColor, crewColor);
+            }
 
             // 내가 죽었을때는 유령플레이어들을 보이게 만들어줘야함.
             var players = GameSystem.Instance.players;

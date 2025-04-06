@@ -120,6 +120,10 @@ public class MeetingUI : MonoBehaviour
             meetingTimeText.text = string.Format("투표시간: {0}s", (int)Mathf.Clamp(GameSystem.Instance.remainTime, 0f, float.MaxValue));
         }
     }
+    public void Close()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 public enum EMeetingState

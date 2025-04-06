@@ -60,15 +60,7 @@ public class GameSystem : NetworkBehaviour
             }
         }
 
-        // 플레이어 스폰 시 원형으로 배치되도록 삼각함수 사용
-        for(int i=0; i<players.Count; i++)
-        {
-            float radian = 2 * Mathf.PI * i / players.Count;
-            float x = Mathf.Cos(radian) * spawnDistance;
-            float y = Mathf.Sin(radian) * spawnDistance;
-            Vector3 newPosition = spawnTransform.position + new Vector3(x, y, 0);
-            players[i].RpcTeleport(newPosition);
-        } // 캐릭터 위치 동기화권한은 각 클라이언트에게 있기 때문에, transform.position을 여기서 직접 수정하면 위치가 제대로 수정되지 않는다. 따라서 InGameCharacterMover 스크립트에서 RpcTeleport 함수를 만들고 서버에서 클라이언트에게 하여금 스스로 transform.position을 수정하도록 해야 한다.
+        AllocatePlayerToAroundTable(players.ToArray()); // 플레이어 스폰 시 원형으로 배치되도록 삼각함수 사용        
 
         yield return new WaitForSeconds(1f);
         RpcStartGame();
@@ -77,6 +69,18 @@ public class GameSystem : NetworkBehaviour
         {
             player.SetKillCoolDown();
         }
+    }
+    private void AllocatePlayerToAroundTable(InGameCharacterMover[] players)
+    {
+        for(int i=0; i<players.Length; i++)
+        {
+            float radian = 2 * Mathf.PI * i / players.Length;
+            float x = Mathf.Cos(radian) * spawnDistance;
+            float y = Mathf.Sin(radian) * spawnDistance;
+            Vector3 newPosition = spawnTransform.position + new Vector3(x, y, 0);
+            players[i].RpcTeleport(newPosition);
+        } // 캐릭터 위치 동기화권한은 각 클라이언트에게 있기 때문에, transform.position을 여기서 직접 수정하면 위치가 제대로 수정되지 않는다. 따라서 InGameCharacterMover 스크립트에서 RpcTeleport 함수를 만들고 서버에서 클라이언트에게 하여금 스스로 transform.position을 수정하도록 해야 한다.
+
     }
         
     // GameReady에서 Client도 실행해야하는부분을 여기로 뺌.
@@ -199,7 +203,81 @@ public class GameSystem : NetworkBehaviour
         }
 
         RpcEndVoteTime();
+        yield return new WaitForSeconds(3f); // 투표가 끝나고, 3초뒤에 결과를 보여줌.
 
+        StartCoroutine(CalculateVoteResult_Coroutine(players)); // 투표결과를 계산함.
+    }
+
+    private class CharacterVoteComparer: IComparer // 배열을 빠르게 정렬하기 위해 IComparer를 상속구현함.
+    {
+        public int Compare(object x, object y)
+        {
+            InGameCharacterMover xPlayer = (InGameCharacterMover)x;
+            InGameCharacterMover yPlayer = (InGameCharacterMover)y;
+            return xPlayer.voteCount <= yPlayer.voteCount ? 1 : -1;
+        }
+    }
+
+    private IEnumerator CalculateVoteResult_Coroutine(InGameCharacterMover[] players)
+    {
+        System.Array.Sort(players, new CharacterVoteComparer());
+        int remainImposterCount=0;
+        foreach(var player in players)
+        {
+            if((player.playerType & EPlayerType.Imposter_Alive) == EPlayerType.Imposter_Alive)
+            {
+                remainImposterCount++;
+            }
+        }
+
+        if(skipVotePlayerCount >= players[0].voteCount)
+        { // 기권한 플레이어가 최다득표자보다 더 많으면, 아무도 퇴출되지않음.
+            RpcOpenEjectionUI(false, EPlayerColor.White, false, remainImposterCount);
+        }
+        else if(players[0].voteCount == 0)
+        { // 투표를 한사람이 아무도 없으면, 아무도 퇴출되지않음.
+            RpcOpenEjectionUI(false, EPlayerColor.White, false, remainImposterCount);
+        }
+        else if(players[0].voteCount == players[1].voteCount)
+        { // 투표수가 같으면, 아무도 퇴출되지않음.
+            RpcOpenEjectionUI(false, EPlayerColor.White, false, remainImposterCount);
+        }
+        else
+        { // 투표수가 다르면, 최다득표자 퇴출.
+            bool isImposter = (players[0].playerType & EPlayerType.Imposter) == EPlayerType.Imposter;
+            RpcOpenEjectionUI(true, players[0].playerColor, isImposter, isImposter ? remainImposterCount - 1 : remainImposterCount);
+
+            players[0].Dead(true, EPlayerColor.White); // 투표로 죽었을 경우, 임의로 죽인 플레이어 색깔을 흰색으로 설정하였음.
+        }
+
+        var deadbodies = FindObjectsOfType<DeadBody>();
+        for(int i=0; i<deadbodies.Length; i++)
+        {
+            Destroy(deadbodies[i].gameObject); // 시체를 없애버림.
+        }
+        AllocatePlayerToAroundTable(players); // 투표가 끝나면, 다시 원형으로 배치함.
+
+        yield return new WaitForSeconds(10f); // 10초동안 결과를 보여줌.
+        RpcCloseEjectionUI(); // 결과를 보여준 후, UI를 닫음.
+    }
+
+    [ClientRpc]
+    public void RpcCloseEjectionUI()
+    {
+        InGameUIManager.Instance.EjectionUI.Close();
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = true; // 투표가 끝나면, 다시 움직일 수 있도록 해줌.
+    }
+
+    [ClientRpc]
+    public void RpcOpenEjectionUI(
+        bool isEjection, 
+        EPlayerColor ejectionPlayerColor, 
+        bool isImposter,
+        int remainImposterCount
+    )
+    {
+        InGameUIManager.Instance.EjectionUI.Open(isEjection, ejectionPlayerColor, isImposter, remainImposterCount);
+        InGameUIManager.Instance.MeetingUI.Close(); // 회의창을 닫음.
     }
 
     [ClientRpc]

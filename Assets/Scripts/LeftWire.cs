@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class LeftWire : MonoBehaviour
 {   
+    public EWireColor WireColor { get; private set; } // 왼쪽 와이어 색상
+    [SerializeField]
+    private List<Image> mWireImages;
+
     [SerializeField]
     private RectTransform mWireBody;
 
@@ -32,4 +36,31 @@ public class LeftWire : MonoBehaviour
         mWireBody.sizeDelta = new Vector2(0f, mWireBody.sizeDelta.y);
     }
 
+    public void SetWireColor(EWireColor wireColor)
+    {
+        WireColor = wireColor;
+        Color color = Color.black;
+        switch(WireColor)
+        {
+            case EWireColor.Red:
+                color = Color.red;
+                break;
+            case EWireColor.Blue:
+                color = Color.blue;
+                break;
+            case EWireColor.Green:
+                color = Color.green;
+                break;
+            case EWireColor.Yellow:
+                color = Color.yellow;
+                break;
+            case EWireColor.Magneta:
+                color = Color.magenta;
+                break;
+        }
+        foreach(var image in mWireImages)
+        {
+            image.color = color;
+        }
+    }
 }

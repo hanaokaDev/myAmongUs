@@ -12,7 +12,38 @@ public class FixWiringTask : MonoBehaviour
 
     private LeftWire mSelectedLeftWire;
 
+    int LEFT_WIRE_COUNT = 4;
 
+    private void OnEnable()
+    {
+        List<int> numberPool = new List<int>();
+        for(int i=0; i<LEFT_WIRE_COUNT; i++)
+        {
+            numberPool.Add(i);
+        }
+
+        int index=0;
+
+        while(numberPool.Count != 0)
+        {
+            var number = numberPool[Random.Range(0, numberPool.Count)];
+            mLeftWires[index++].SetWireColor((EWireColor)number);
+            numberPool.Remove(number);
+        }
+
+        for(int i=0; i<LEFT_WIRE_COUNT; i++)
+        {
+            numberPool.Add(i);
+        }
+
+        index=0;
+        while(numberPool.Count != 0)
+        {
+            var number = numberPool[Random.Range(0, numberPool.Count)];
+            mRightWires[index++].SetWireColor((EWireColor)number);
+            numberPool.Remove(number);
+        }
+    }
     
     void Update()
     {
@@ -64,4 +95,14 @@ public class FixWiringTask : MonoBehaviour
         }
     }
 
+}
+
+public enum EWireColor
+{
+    None = -1,
+    Red = 0,
+    Blue,
+    Green,
+    Yellow,
+    Magneta,
 }

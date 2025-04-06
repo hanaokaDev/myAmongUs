@@ -44,6 +44,24 @@ public class LeftWire : MonoBehaviour
         {
             if(mSelectedWire != null)
             {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(Input.mousePosition, Vector2.right, 1f);
+                foreach(var hit in hits) // rightWire 찾기
+                {
+                    if(hit.collider != null)
+                    {
+                        var right = hit.collider.GetComponentInParent<RightWire>();
+                        if(right != null)
+                        { // left <-> right를 연결시키기
+                            float angle = Vector2.SignedAngle(transform.position + Vector3.right - transform.position, hit.transform.position - transform.position); // 왜 transform.position 더했다 뺌?
+                            float distance = Vector2.Distance(mWireBody.transform.position, hit.transform.position) - 40;
+                            mWireBody.localRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+                            mWireBody.sizeDelta = new Vector2(distance * (1/mGameCanvas.transform.localScale.x), mWireBody.sizeDelta.y);
+                            mSelectedWire = null;
+                            return;
+                        }
+                    }
+                }
+                // right 못찾으면 원상복구한다.
                 mWireBody.localRotation = Quaternion.Euler(Vector3.zero);
                 mWireBody.sizeDelta = new Vector2(0f, mWireBody.sizeDelta.y);
                 mSelectedWire = null; // 마우스 떼면 selectedWire 를 비워준다.

@@ -6,6 +6,14 @@ using UnityEngine.UI;
 public class LeftWire : MonoBehaviour
 {   
     public EWireColor WireColor { get; private set; } // 왼쪽 와이어 색상
+
+    public bool IsConnected{get; private set;}
+
+    [SerializeField]
+    private Image mLightImage;
+    [SerializeField]
+    private RightWire mConnectedWire; // 연결된 오른쪽 와이어
+
     [SerializeField]
     private List<Image> mWireImages;
 
@@ -62,5 +70,30 @@ public class LeftWire : MonoBehaviour
         {
             image.color = color;
         }
+    }
+
+    public void ConnectWire(RightWire rightWire) // 색이 같은 두 전선이 연결되면 빛을 내게 한다.
+    {
+        if(mConnectedWire != null && mConnectedWire != rightWire)
+        {
+            mConnectedWire.DisconnectWire(this);
+            mConnectedWire = null; // 연결된 전선이 없을때만 불빛을 끈다.
+        }
+        mConnectedWire = rightWire;
+        if(mConnectedWire.WireColor == WireColor)
+        {
+            mLightImage.color = Color.yellow; // 연결되면 불빛이 켜진다.
+            IsConnected = true;
+        }
+    }
+    public void DisconnectWire() // 색이 다른 전선이 연결되면 빛을 끈다.
+    {
+        if(mConnectedWire != null)
+        {
+            mConnectedWire.DisconnectWire(this); // 연결된 오른쪽 전선과의 연결을 끊는다.
+            mConnectedWire = null;
+        }
+        mLightImage.color = Color.gray; // 연결이 끊어지면 불빛이 꺼진다.
+        IsConnected = false;
     }
 }

@@ -78,6 +78,8 @@ public class FixWiringTask : MonoBehaviour
                         if(right != null)
                         { // left <-> right를 연결시키기
                             mSelectedLeftWire.SetTarget(hit.transform.position, 40f);
+                            mSelectedLeftWire.ConnectWire(right);
+                            right.ConnectWire(mSelectedLeftWire);
                             mSelectedLeftWire = null;
                             return;
                         }
@@ -85,6 +87,7 @@ public class FixWiringTask : MonoBehaviour
                 }
                 // right 못찾으면 원상복구한다.
                 mSelectedLeftWire.ResetTarget();
+                mSelectedLeftWire.DisconnectWire(); // 연결된 전선이 없을때만 불빛을 끈다.
                 mSelectedLeftWire = null; // 마우스 떼면 selectedWire 를 비워준다.
             }
         }

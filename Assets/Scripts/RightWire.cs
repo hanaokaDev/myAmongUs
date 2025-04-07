@@ -15,6 +15,7 @@ public class RightWire : MonoBehaviour
     [SerializeField]
     private Image mLightImage;
 
+    [SerializeField] // serialized for debugging
     private List<LeftWire> mConnectedWires; // 연결된 왼쪽 와이어들
     
     public void SetWireColor(EWireColor wireColor)
@@ -51,9 +52,12 @@ public class RightWire : MonoBehaviour
     {
         if(mConnectedWires.Contains(leftWire))
         {
+            Debug.Log("Already connected wire.");
             return;
         }
+        Debug.Log("Connect wire: " + leftWire.name);
         mConnectedWires.Add(leftWire);
+        Debug.Log("Connected wires count: " + mConnectedWires.Count);
         if(mConnectedWires.Count == 1 && leftWire.WireColor == WireColor) // 연결된 전선이 처음일때만 불빛을 켠다.
         {
             mLightImage.color = Color.yellow;
@@ -63,6 +67,7 @@ public class RightWire : MonoBehaviour
             mLightImage.color = Color.gray; // 연결된 전선이 없을때만 불빛을 끈다.
             IsConnected = false;
         }
+        Debug.Log("Done");
     }
     public void DisconnectWire(LeftWire leftWire) // 색이 다른 전선이 연결되면 빛을 끈다.
     {

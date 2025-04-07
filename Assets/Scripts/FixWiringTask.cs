@@ -10,6 +10,8 @@ public class FixWiringTask : MonoBehaviour
     [SerializeField]
     private List<RightWire> mRightWires;
 
+
+    [SerializeField] // serialized for debugging
     private LeftWire mSelectedLeftWire;
 
     int LEFT_WIRE_COUNT = 4;
@@ -49,7 +51,7 @@ public class FixWiringTask : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            
+            Debug.Log("Mouse Down");
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.right, 1f);
             if(hit.collider != null)
             {
@@ -67,6 +69,7 @@ public class FixWiringTask : MonoBehaviour
         // 마우스 떼면 원상복구
         if(Input.GetMouseButtonUp(0))
         {
+            Debug.Log("Mouse Up");
             if(mSelectedLeftWire != null)
             {
                 RaycastHit2D[] hits = Physics2D.RaycastAll(Input.mousePosition, Vector2.right, 1f);
@@ -77,9 +80,13 @@ public class FixWiringTask : MonoBehaviour
                         var right = hit.collider.GetComponentInParent<RightWire>();
                         if(right != null)
                         { // left <-> right를 연결시키기
+                            Debug.Log("001 LeftWire: " + mSelectedLeftWire.WireColor + " RightWire: " + right.WireColor);
                             mSelectedLeftWire.SetTarget(hit.transform.position, 40f);
+                            Debug.Log("002 SetTarget: " + hit.transform.position);
                             mSelectedLeftWire.ConnectWire(right);
+                            Debug.Log("003 ConnectWire: " + right.WireColor);
                             right.ConnectWire(mSelectedLeftWire);
+                            Debug.Log("004 ConnectWire: " + mSelectedLeftWire.WireColor);
                             mSelectedLeftWire = null;
                             return;
                         }

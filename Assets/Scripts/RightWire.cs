@@ -15,8 +15,7 @@ public class RightWire : MonoBehaviour
     [SerializeField]
     private Image mLightImage;
 
-    [SerializeField] // serialized for debugging
-    private List<LeftWire> mConnectedWires; // 연결된 왼쪽 와이어들
+    private List<LeftWire> mConnectedWires = new List<LeftWire>(); // 연결된 왼쪽 와이어들
     
     public void SetWireColor(EWireColor wireColor)
     {

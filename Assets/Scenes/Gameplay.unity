@@ -1900,6 +1900,8 @@ GameObject:
   - component: {fileID: 107246083}
   - component: {fileID: 107246085}
   - component: {fileID: 107246084}
+  - component: {fileID: 107246086}
+  - component: {fileID: 107246087}
   m_Layer: 0
   m_Name: sprite_admin_wiring
   m_TagString: Untagged
@@ -2022,6 +2024,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &107246086
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107246082}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.019816875, y: -0.15457019}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.38, y: 0.27}
+    newSize: {x: 0.38, y: 0.27}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.6257267, y: 0.5791403}
+  m_EdgeRadius: 0
+--- !u!114 &107246087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107246082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0097326654bf24645917b799748bea96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _UseButtonSprite: {fileID: 21300000, guid: 1abf9d0ad96ed484ab3f289f79f9404d, type: 3}
 --- !u!1 &113183840
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,6 +3349,9 @@ MonoBehaviour:
   reportUI: {fileID: 1749572018}
   meetingUI: {fileID: 403431644}
   ejectionUI: {fileID: 1375228125}
+  _FixWiringTaskUI: {fileID: 922473228}
+  _UseButton: {fileID: 454744612}
+  _OriginUseButtonSprite: {fileID: 21300000, guid: 1abf9d0ad96ed484ab3f289f79f9404d, type: 3}
 --- !u!1 &194214862
 GameObject:
   m_ObjectHideFlags: 0
@@ -23029,6 +23093,7 @@ GameObject:
   - component: {fileID: 1662704499}
   - component: {fileID: 1662704501}
   - component: {fileID: 1662704500}
+  - component: {fileID: 1662704502}
   m_Layer: 0
   m_Name: sprite_admin_wiring (1)
   m_TagString: Untagged
@@ -23152,6 +23217,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1662704502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662704498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e3332c5e105cf349a17ae6edfc5aeb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OutlineColor: {r: 1, g: 1, b: 0, a: 1}
 --- !u!1 &1665962060
 GameObject:
   m_ObjectHideFlags: 0
@@ -26344,7 +26422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1940065886
 RectTransform:
   m_ObjectHideFlags: 0

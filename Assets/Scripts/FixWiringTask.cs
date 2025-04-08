@@ -18,6 +18,12 @@ public class FixWiringTask : MonoBehaviour
 
     private void OnEnable()
     {
+        for(int i=0; i<mLeftWires.Count; i++)
+        {
+            mLeftWires[i].ResetTarget(); // 다른사람이 이어서 작업못하도록 초기화
+            mLeftWires[i].DisconnectWire(); 
+        }
+
         List<int> numberPool = new List<int>();
         for(int i=0; i<LEFT_WIRE_COUNT; i++)
         {
@@ -88,6 +94,7 @@ public class FixWiringTask : MonoBehaviour
                             right.ConnectWire(mSelectedLeftWire);
                             Debug.Log("004 ConnectWire: " + mSelectedLeftWire.WireColor);
                             mSelectedLeftWire = null;
+                            CheckCompleteTask();
                             return;
                         }
                     }
@@ -96,6 +103,8 @@ public class FixWiringTask : MonoBehaviour
                 mSelectedLeftWire.ResetTarget();
                 mSelectedLeftWire.DisconnectWire(); // 연결된 전선이 없을때만 불빛을 끈다.
                 mSelectedLeftWire = null; // 마우스 떼면 selectedWire 를 비워준다.
+                CheckCompleteTask();
+                
             }
         }
 
@@ -105,6 +114,36 @@ public class FixWiringTask : MonoBehaviour
         }
     }
 
+    // 모든 Wire가 연결되면 Task 완료.
+    private void CheckCompleteTask()
+    {
+        bool isAllComplete = true;
+        foreach(var wire in mLeftWires)
+        {
+            if(!wire.IsConnected)
+            {
+                isAllComplete = false;
+                break;
+            }
+        }
+        if(isAllComplete){
+            Close();
+        }
+    }
+
+    public void Open()
+    {
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = false;
+        gameObject.transform.parent.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        AmongUsRoomPlayer.MyRoomPlayer.myCharacter.IsMovable = true;
+        gameObject.transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+    }
 }
 
 public enum EWireColor
